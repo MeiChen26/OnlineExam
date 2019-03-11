@@ -12,11 +12,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- 导出 jiaxiao 的数据库结构
-CREATE DATABASE IF NOT EXISTS `jiaxiao` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `jiaxiao`;
+-- 导出 exam 的数据库结构
+CREATE DATABASE IF NOT EXISTS `exam` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `exam`;
 
--- 导出  表 jiaxiao.sys_user 结构
+-- 导出  表 exam.sys_user 结构
 CREATE TABLE IF NOT EXISTS `sys_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL COMMENT '用户名，登陆名',
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- 正在导出表  jiaxiao.sys_user 的数据：~5 rows (大约)
+-- 正在导出表  exam.sys_user 的数据：~5 rows (大约)
 DELETE FROM `sys_user`;
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`id`, `user_name`, `real_name`, `password`, `phone`, `type`, `coach_id`, `deleted`, `create_time`, `update_time`) VALUES
@@ -42,7 +42,7 @@ INSERT INTO `sys_user` (`id`, `user_name`, `real_name`, `password`, `phone`, `ty
 	(5, '0123456789', '小李', '9f6275fcf7de34eaf2dc940d6feacc47c42f4d6e18d9baa72666342e', '0123456789', 2, 2, 0, '2018-12-05 16:45:56', '2018-12-07 14:16:07');
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
--- 导出  表 jiaxiao.tb_coach 结构
+-- 导出  表 exam.tb_coach 结构
 CREATE TABLE IF NOT EXISTS `tb_coach` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL COMMENT '教练名称',
@@ -52,14 +52,14 @@ CREATE TABLE IF NOT EXISTS `tb_coach` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='教练表';
 
--- 正在导出表  jiaxiao.tb_coach 的数据：~2 rows (大约)
+-- 正在导出表  exam.tb_coach 的数据：~2 rows (大约)
 DELETE FROM `tb_coach`;
 /*!40000 ALTER TABLE `tb_coach` DISABLE KEYS */;
 INSERT INTO `tb_coach` (`id`, `name`, `carno`, `create_time`, `update_time`) VALUES
 	(2, '李四', '鲁Q4561234', '2018-12-04 16:09:41', NULL);
 /*!40000 ALTER TABLE `tb_coach` ENABLE KEYS */;
 
--- 导出  表 jiaxiao.tb_exam 结构
+-- 导出  表 exam.tb_exam 结构
 CREATE TABLE IF NOT EXISTS `tb_exam` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) DEFAULT NULL COMMENT '学员id',
@@ -72,14 +72,14 @@ CREATE TABLE IF NOT EXISTS `tb_exam` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='考试成绩表';
 
--- 正在导出表  jiaxiao.tb_exam 的数据：~2 rows (大约)
+-- 正在导出表  exam.tb_exam 的数据：~2 rows (大约)
 DELETE FROM `tb_exam`;
 /*!40000 ALTER TABLE `tb_exam` DISABLE KEYS */;
 INSERT INTO `tb_exam` (`id`, `student_id`, `score1`, `score2`, `score3`, `score4`, `create_time`, `update_time`) VALUES
 	(2, 5, 90, 100, 100, 100, '2018-12-05 16:46:30', '2018-12-05 16:50:45');
 /*!40000 ALTER TABLE `tb_exam` ENABLE KEYS */;
 
--- 导出  表 jiaxiao.tb_options 结构
+-- 导出  表 exam.tb_options 结构
 CREATE TABLE IF NOT EXISTS `tb_options` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) DEFAULT NULL COMMENT '题目id',
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `tb_options` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4 COMMENT='选项表';
 
--- 正在导出表  jiaxiao.tb_options 的数据：~21 rows (大约)
+-- 正在导出表  exam.tb_options 的数据：~21 rows (大约)
 DELETE FROM `tb_options`;
 /*!40000 ALTER TABLE `tb_options` DISABLE KEYS */;
 INSERT INTO `tb_options` (`id`, `question_id`, `opt`, `content`, `rig`, `create_time`, `update_time`) VALUES
@@ -140,7 +140,7 @@ INSERT INTO `tb_options` (`id`, `question_id`, `opt`, `content`, `rig`, `create_
 	(83, 27, 'D', '犯罪', b'0', '2018-12-07 15:43:24', NULL);
 /*!40000 ALTER TABLE `tb_options` ENABLE KEYS */;
 
--- 导出  表 jiaxiao.tb_question 结构
+-- 导出  表 exam.tb_question 结构
 CREATE TABLE IF NOT EXISTS `tb_question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subject` int(2) DEFAULT NULL COMMENT '科目，1：科目1；2：科目2；3：科目3；4：科目4',
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `tb_question` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COMMENT='题库表';
 
--- 正在导出表  jiaxiao.tb_question 的数据：~9 rows (大约)
+-- 正在导出表  exam.tb_question 的数据：~9 rows (大约)
 DELETE FROM `tb_question`;
 /*!40000 ALTER TABLE `tb_question` DISABLE KEYS */;
 INSERT INTO `tb_question` (`id`, `subject`, `title`, `analysis`, `type`, `answer`, `attachment`, `create_time`, `update_time`) VALUES
