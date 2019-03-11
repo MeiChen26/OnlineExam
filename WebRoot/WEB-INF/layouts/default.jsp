@@ -20,7 +20,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>驾校综合信息管理系统</title>
+<title>在线考试系统</title>
 <!-- reference 引入了一些基础的 样式和js插件，如需拓展 样式文件放到该标签上方，js脚本放该标签下方 -->
 <!-- REFERENCES BEGIN -->
 <link rel="stylesheet" type="text/css"
@@ -68,7 +68,7 @@
 		<div class="header-left-div" style="background-color: #5d8ffc;"> 
 		</div>
 		<div class="header-right-div">
-			<span class="header-title">驾校综合信息管理系统</span>
+			<span class="header-title">在线考试系统</span>
 
 			<div class="header-logout-div">
 				<div class="header-logout-btn-div">
