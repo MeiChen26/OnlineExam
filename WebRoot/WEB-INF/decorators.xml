@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/layouts">
+	<!-- 不需要过滤的请求 -->
+	<excludes>
+		<pattern>/assets/*</pattern><!-- web资源，js、css等 -->
+		<pattern>/system/loginpage</pattern><!-- 首页登录页面，不需要装饰 -->
+		<pattern>/category/categoryTree*</pattern>
+		<pattern>/link/linkImages*</pattern>
+		<pattern>/duty/detail*</pattern>
+		<pattern>/reserveset/addHoliday*</pattern>
+		<pattern>/reserveset/addWeekWork*</pattern>
+		<pattern>/settle/print*</pattern>
+	</excludes>
+	<!-- 定义装饰器default要过滤的页面 -->
+	<decorator name="default" page="default.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<!-- 定义装饰器front（网站前端页面）要过滤的页面 -->
+	<decorator name="front" page="front.jsp">
+		<pattern>/front/*</pattern>
+		<pattern>/web/*</pattern>
+	</decorator>
+</decorators>

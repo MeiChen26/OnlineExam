@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.exam.dao.TbOptionsMapper">
+  <resultMap id="BaseResultMap" type="com.project.exam.model.TbOptions">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="opt" jdbcType="VARCHAR" property="opt" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="rig" jdbcType="BIT" property="rig" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_id, opt, content, rig, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_options
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_options
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.exam.model.TbOptions">
+    insert into tb_options (id, question_id, opt, 
+      content, rig, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{opt,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{rig,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.exam.model.TbOptions">
+    insert into tb_options
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="opt != null">
+        opt,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="rig != null">
+        rig,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="opt != null">
+        #{opt,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="rig != null">
+        #{rig,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.exam.model.TbOptions">
+    update tb_options
+    <set>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="opt != null">
+        opt = #{opt,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="rig != null">
+        rig = #{rig,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.exam.model.TbOptions">
+    update tb_options
+    set question_id = #{questionId,jdbcType=INTEGER},
+      opt = #{opt,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      rig = #{rig,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 自定义 -->
+  <select id="selectByQuestion" resultMap="BaseResultMap">
+  	select * from tb_options where question_id = #{questionId} order by opt asc
+  </select>
+  <delete id="deleteByQuestionId">
+  	delete from tb_options where question_id = #{questionId}
+  </delete>
+</mapper>

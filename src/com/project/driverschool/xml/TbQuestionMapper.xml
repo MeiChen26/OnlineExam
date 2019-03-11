@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.exam.dao.TbQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.project.exam.model.TbQuestion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="subject" jdbcType="INTEGER" property="subject" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="attachment" jdbcType="VARCHAR" property="attachment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.project.exam.model.TbQuestion">
+    <result column="analysis" jdbcType="LONGVARCHAR" property="analysis" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, subject, title, type, answer, attachment, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    analysis
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.exam.model.TbQuestion">
+    insert into tb_question (id, subject, title, 
+      type, answer, attachment, 
+      create_time, update_time, analysis
+      )
+    values (#{id,jdbcType=INTEGER}, #{subject,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{answer,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{analysis,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.exam.model.TbQuestion" keyProperty="id" useGeneratedKeys="true">
+    insert into tb_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="attachment != null">
+        attachment,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="analysis != null">
+        analysis,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null">
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="analysis != null">
+        #{analysis,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.exam.model.TbQuestion">
+    update tb_question
+    <set>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null">
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="analysis != null">
+        analysis = #{analysis,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.project.exam.model.TbQuestion">
+    update tb_question
+    set subject = #{subject,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      analysis = #{analysis,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.exam.model.TbQuestion">
+    update tb_question
+    set subject = #{subject,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      answer = #{answer,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 自定义 -->
+  <!-- 分页 -->
+	<sql id="limit_sql">
+		<if test="pageinfo.startIndex != null and pageinfo.paginationSize != null">
+			limit #{pageinfo.startIndex},#{pageinfo.paginationSize}
+		</if>
+	</sql>
+	<!-- 排序 -->
+	<sql id="orderby_sql">
+		ORDER BY create_time desc
+	</sql>
+  <!-- 获取符合条件的用户信息 分页展示 -->
+  <select id="getDataList" resultMap="BaseResultMap">
+		SELECT *
+		FROM tb_question
+		<where>
+			<if test="pageinfo.params != null">
+				<if test="pageinfo.params.subject != null">
+					AND subject = #{pageinfo.params.subject}
+				</if>
+			</if>
+		</where>
+		<include refid="orderby_sql" />
+		<include refid="limit_sql" />
+	</select>
+	<select id="getDataTotalNum" resultType="java.lang.Integer">
+		SELECT count(1)
+		FROM tb_question
+		<where>
+			<if test="pageinfo.params != null">
+				<if test="pageinfo.params.subject != null">
+					AND subject = #{pageinfo.params.subject}
+				</if>
+			</if>
+		</where>
+	</select>
+	<select id="selectNextBySubject" resultMap="BaseResultMap">
+		select * from tb_question 
+		where subject = #{subject} 
+		<if test="preId != null">
+			and id > #{preId} 
+		</if>
+		order by id asc 
+		limit 0, 1
+	</select>
+</mapper>
