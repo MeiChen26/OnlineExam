@@ -62,16 +62,10 @@
 			<value>
 				/system/logout = logoutFilter
 				/assets/**=anon
-				/attachment/**=anon
-				/wechat/**=anon
-				/weixin/**=anon
 				/plugins/**=anon
 				/druid/**=anon
-				/f/v1/service/**=anon
-				/code=anon
-				/web/**=anon
-				/ueditor/**=anon
-				/file/**=anon
+				/f/**=anon
+				/= anon
 				/**=authc
 			</value>
 		</property>

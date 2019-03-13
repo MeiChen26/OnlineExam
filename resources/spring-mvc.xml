@@ -80,7 +80,6 @@
 	<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <!-- 不拦截登录 -->
             <mvc:exclude-mapping path="/assets/**"/>
             <bean class="com.project.exam.common.UserOperateLogInterceptor"/>
         </mvc:interceptor>
@@ -89,7 +88,19 @@
             <!-- 不拦截登录 -->
             <mvc:exclude-mapping path="/assets/**"/>
             <mvc:exclude-mapping path="/system/loginpage"/>
+            <mvc:exclude-mapping path="/f/**"/>
             <bean class="com.project.exam.common.SystemInterceptor">
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/f/**"/>
+            <!-- 不拦截登录注册首页 -->
+            <mvc:exclude-mapping path="/f"/>
+            <mvc:exclude-mapping path="/f/toLogin"/>
+            <mvc:exclude-mapping path="/f/login"/>
+            <mvc:exclude-mapping path="/f/toRegister"/>
+            <mvc:exclude-mapping path="/f/register"/>
+            <bean class="com.project.exam.common.FrontInterceptor">
             </bean>
         </mvc:interceptor>
 
