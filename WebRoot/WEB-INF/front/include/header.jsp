@@ -13,7 +13,6 @@
 <link href="${ctxAssets}/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="${ctxAssets}/front/css/style.css" rel='stylesheet' type='text/css' />
 <link href="${ctxAssets}/front/css/application.css" media="screen" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${ctxAssets}/plugin/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${ctxAssets}/plugin/jquery/jquery-1.7.2.js" ></script>
 <script type="text/javascript" src="${ctxAssets}/front/js/tab.js" ></script>
 
@@ -21,28 +20,27 @@
 <script src="${ctxAssets}/plugin/jbox-v2.3/jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-<!--
-//-->
-$(document).ready(function() {
+
+/* $(document).ready(function() {
 	var reqpath='${reqpath}';
 	$("#"+reqpath).addClass("active");
-});
+}); */
 
 
 </script>
  <script type="text/javascript"> 
-  $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', function(_result) { 
+/*   $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', function(_result) { 
  	 if (remote_ip_info.ret == '1') { 
  	 	//alert('国家：' + remote_ip_info.country +'\n省：' + remote_ip_info.province + '\n市：' + remote_ip_info.city + '\n区：' + remote_ip_info.district + '\nISP：' + remote_ip_info.isp + '\n类型：' + remote_ip_info.type + '\n其他：' + remote_ip_info.desc); 
  	 	$("#locationSpan").html(remote_ip_info.city); 
  	 } 
-  });
+  }); */
 </script> 
 <section class="head" id="header">
 	<aside class="header_else_wap">
 		<span class="chengshi" id="locationSpan"></span>
 		<div class="header_else_right">
-			<span class="a6Color">欢迎来到电费平台</span>
+			<span class="a6Color">在线考试系统</span>
 			<c:choose>
 			<%-- <c:when test="${fns:getMember().id==null}">
 			33333
@@ -58,7 +56,6 @@ $(document).ready(function() {
 			<a href="${ctx}/toLogin"><span class="e34b16Color ak2">登 录</span></a>
 			</c:otherwise>
 			</c:choose>
-			<span class="huColor" style="display: none;">商务合作</span>
 			<span class="huColor" style="display: none;">帮助中心</span>
 			<img src="${ctxAssets}/images/dianh.png" class="tel_icon">
 			<span class="a6Color">服务热线:</span>			
@@ -76,8 +73,8 @@ $(document).ready(function() {
 <!--                </div> -->
 			<div id="nav">
 				<ul>
-					   <li id="index"><a href="${ctx }/index">首页</a></li>
-                       <li id="building"><a href="${ctx }/electricInfo">电费查询</a></li>
+					   <li id="toLogin"><a href="${ctx }/toLogin">登录</a></li>
+                       <li id="building"><a href="${ctx }/electricInfo">成绩查询</a></li>
                        <li id="usAbout"><a href="${ctx }/selfCenter">个人中心</a></li>
 				</ul>
 			</div>

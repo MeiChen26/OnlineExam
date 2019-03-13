@@ -12,7 +12,7 @@
 <section id="mima_login">
 
 			<!-- 密码登录 -->	
-			<form id="mimaForm" action="${ctx }/login" onsubmit="return loginPostCheck();">	
+			<form id="mimaForm" action="${ctx}/login" onsubmit="return loginPostCheck();">	
 			<article class="login_list1" style="display: block;">
 			   
 				<div class="row2">
@@ -37,6 +37,9 @@
 		</section>       
 </div>
 <script type="text/javascript">
+	$(document).ready(function() {
+		$("#toLogin").addClass("active");
+	}); 
 //账号密码验证
 function validation(logo) {
 
@@ -97,7 +100,6 @@ function validation(logo) {
                 return false;
             }
             return true;
-     }
      }
 </script>
 </body>
