@@ -95,7 +95,6 @@
         <mvc:interceptor>
             <mvc:mapping path="/f/**"/>
             <!-- 不拦截登录注册首页 -->
-            <mvc:exclude-mapping path="/f"/>
             <mvc:exclude-mapping path="/f/toLogin"/>
             <mvc:exclude-mapping path="/f/login"/>
             <mvc:exclude-mapping path="/f/toRegister"/>

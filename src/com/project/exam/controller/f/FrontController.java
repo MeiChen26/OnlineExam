@@ -36,12 +36,12 @@ public class FrontController extends BaseController{
 		return "front/index";
 	}
 	
-	@RequestMapping(value = {"toLogin"})
+	@RequestMapping(value = "toLogin")
 	public String toLogin() {
 		return "front/login";
 	}
 
-	@RequestMapping(value = {"login"})
+	@RequestMapping(value = "login")
 	public String login(Model model,HttpServletRequest request,FrontUser frontUser) {
 		frontUser = frontUserService.getByCondition(frontUser);
 		HttpSession e=request.getSession();
@@ -55,12 +55,12 @@ public class FrontController extends BaseController{
 		
 
 	}
-	@RequestMapping(value = {"toRegister"})
+	@RequestMapping(value = "toRegister")
 	public String toRegister() {
 		return "front/register";
 	}
 	
-	@RequestMapping(value = {"register"})
+	@RequestMapping(value = "register")
 	@ResponseBody
 	public String register(Model model,FrontUser frontUser) {
 		frontUser.setCreateTime(new Date());
@@ -78,12 +78,12 @@ public class FrontController extends BaseController{
 
 	}
 	
-	@RequestMapping(value = {"selfCenter"})
+	@RequestMapping(value = "selfCenter")
 	public String selfCenter() {
 		return "front/selfCenter";
 	}
 	
-	@RequestMapping(value = {"saveFrontUser"})
+	@RequestMapping(value = "saveFrontUser")
 	@ResponseBody
 	public String saveFrontUser(Model model,FrontUser frontUser) {
 		try {

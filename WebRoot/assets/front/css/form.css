@@ -1,0 +1,81 @@
+.table {
+    font-size: 14px;
+    color: #696969;
+}
+.table th.minw120, .table td.minw120 {
+
+    min-width: 120px;
+    overflow: hidden;
+
+}
+th.first {
+
+    width: 96px;
+    font-weight: normal;
+    text-align: right;
+
+}
+.table th, .table td {
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+
+.table th.maxw300, .table td.maxw300 {
+
+    max-width: 300px;
+    overflow: hidden;
+
+}
+ th.second {
+
+    padding-left: 10px;
+    width: 190px;
+    text-align: left;
+
+}
+.text-input input {
+
+    width: 222px;
+    height: 30px;
+    border: 1px solid #eeeeee;
+    padding-left: 6px;
+
+}
+
+.table select {
+
+    font-size: 14px;
+    color: #696969;
+
+}
+
+.btn-box {
+
+    padding-left: 350px;
+    padding-top: 60px;
+
+}
+
+.btn-box input.active {
+
+    background-color: #1f78ed;
+    color: #fff;
+
+}
+ .btn-box input {
+
+    width: 85px;
+    height: 32px;
+    line-height: 32px;
+    background-color: #d6d9df;
+    border-radius: 5px;
+    color: #585858;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin-left: 20px;
+
+}
+
