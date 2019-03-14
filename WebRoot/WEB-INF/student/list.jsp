@@ -18,17 +18,17 @@
 					<form action="${pageContext.request.contextPath}/student/list" id="selectForm" method="post">
 						<!-- 公用部分 -->
 						<div class="header-box">
-							<h2>学员管理</h2>
+							<h2>学生管理</h2>
 							<ul class="clearfix" style="overflow: hidden;height:45px;margin-top: 10px;">
 								<li class="fl input">
-									学员名称:
-									<input type="text" name="keyword" value="${keyword}" placeholder="学员名称">
+									姓名:
+									<input type="text" name="keyword" value="${keyword}" placeholder="姓名">
 								</li>
 								<li class="fl btn" style="margin-left: 10px;">
 									<input class="active" type="submit" value="查询">
 								</li>
 								<li class="fr btn">
-									<input class="active" type="button" value="添加学员" onclick="url('${pageContext.request.contextPath}/student/addOrUpdate')">
+									<input class="active" type="button" value="添加" onclick="url('${pageContext.request.contextPath}/student/addOrUpdate')">
 	                            </li>
 							</ul>
 						</div>
@@ -44,9 +44,8 @@
 					<thead>
 						<tr class="header">
 							<td width="5%">序号</td>
-							<td width="10%">学员名称</td>
-							<td width="10%">所属教练</td>
-							<td width="10%">电话</td>
+							<td width="10%">姓名</td>
+							<td width="10%">学号</td>
 							<td width="10%">状态</td>
 							<td width="8%">操作</td>
 						</tr>
@@ -55,9 +54,8 @@
 						<c:forEach var="student" items="${pageinfo.resultList}" varStatus="vstatus">
 							<tr>
 								<td>${(pageinfo.currentPage-1)*pageinfo.paginationSize+vstatus.count}</td>
-								<td>${student.realName}</td>
-								<td>${student.coachName}</td>
-								<td>${student.phone}</td>
+								<td>${student.name}</td>
+								<td>${student.studentNo}</td>
 								<td>
 									<c:if test="${student.deleted==true}">已删除</c:if>
 									<c:if test="${student.deleted==false}">正常</c:if>

@@ -5,19 +5,15 @@ import java.util.Date;
 public class FrontUser {
     private Integer id;
 
-    private String loginName;
+    private String name;
 
     private String password;
-
-    private String city;
-
-    private String address;
-
-    private Integer oweRemind;
 
     private Boolean deleted;
 
     private Date createTime;
+
+    private String studentNo;
 
     public Integer getId() {
         return id;
@@ -27,12 +23,12 @@ public class FrontUser {
         this.id = id;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getName() {
+        return name;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName == null ? null : loginName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public String getPassword() {
@@ -41,30 +37,6 @@ public class FrontUser {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city == null ? null : city.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public Integer getOweRemind() {
-        return oweRemind;
-    }
-
-    public void setOweRemind(Integer oweRemind) {
-        this.oweRemind = oweRemind;
     }
 
     public Boolean getDeleted() {
@@ -81,5 +53,13 @@ public class FrontUser {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getStudentNo() {
+        return studentNo;
+    }
+
+    public void setStudentNo(String studentNo) {
+        this.studentNo = studentNo == null ? null : studentNo.trim();
     }
 }

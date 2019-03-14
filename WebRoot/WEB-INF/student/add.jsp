@@ -10,30 +10,26 @@
 <body>
 	<!-- PAGE CONTENT BEGIN -->
 	<div class="right-area">
-		<h3>添加学员</h3>
+		<h3>添加学生</h3>
 		<form id="inputForm" name="inputForm"
 			action="${pageContext.request.contextPath}/student/save"
 			method="post">
 			<table class="table">
 				<tbody>
 					<tr>
-						<th class="first minw120">教练</th>
+						<th class="first minw120">姓名</th>
 						<th class="second maxw300">
-							<div class="select-radio" >
-								<select  name="coachId">
-								   <c:forEach var="coach" items="${coachList}">
-									<option value="${coach.id }" >${coach.name }</option>
-								   </c:forEach>
-								</select>
+							<div class="text-input">
+								<input type="text" name="name" id="name" value="" maxlength="20"
+									class="required" placeholder="姓名" title="必选字段" />
 							</div>
 						</th>
 					</tr>
 					<tr>
-						<th class="first minw120">学员姓名</th>
+						<th class="first minw120">学号</th>
 						<th class="second maxw300">
 							<div class="text-input">
-								<input type="text" name="realName" id="realName" value="" maxlength="20"
-									class="required" placeholder="学员姓名" title="必选字段" />
+								<input type="text" class="required" name="studentNo" value="" placeholder="学号" maxlength="20"/>
 							</div>
 						</th>
 					</tr>
@@ -48,14 +44,7 @@
 							</div>
 						</th>
 					</tr> -->
-					<tr>
-						<th class="first minw120">手机号</th>
-						<th class="second maxw300">
-							<div class="text-input">
-								<input type="text" class="required" name="phone" value="" placeholder="手机号" maxlength="20"/>
-							</div>
-						</th>
-					</tr>
+					
 				</tbody>
 			</table>
 			<div class="btn-box">

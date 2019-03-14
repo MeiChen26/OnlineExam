@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.exam.model.SysUser;
+import com.project.exam.model.f.FrontUser;
 import com.project.exam.service.CoachService;
 import com.project.exam.service.SysUserService;
+import com.project.exam.service.f.FrontUserService;
 import com.project.utils.EncryptUtil;
 import com.project.utils.PaginationInfo;
 import com.project.utils.StringUtil;
@@ -23,7 +25,7 @@ import com.project.utils.StringUtil;
 /**
  * 
  * <p>ClassName: StudentController</p>
- * <p>Description: 学员管理</p>
+ * <p>Description: 学生管理</p>
  * @Author  
  * @Date: 
  */
@@ -32,14 +34,13 @@ import com.project.utils.StringUtil;
 public class StudentController extends BaseController {
 	static final Logger log = LoggerFactory.getLogger(StudentController.class);
 	/**
-	 * @Fields SPLITPAGE_SIZE : 用户管理分页，每页的数目
+	 * @Fields SPLITPAGE_SIZE : 学生管理分页，每页的数目
 	 */
 	public static final int SPLITPAGE_SIZE = 10;
 	
 	@Autowired
-	SysUserService userService;
-	@Autowired
-	CoachService coachService;
+	FrontUserService frontUserService;
+	
 	
 	/**
 	 * <p>Title: list</p>
@@ -62,7 +63,7 @@ public class StudentController extends BaseController {
 				params.put("keyword", keyword);
 			}
 			
-			PaginationInfo<SysUser> pageinfo = userService.getPaginationData(params, reqPage, SPLITPAGE_SIZE);
+			PaginationInfo<FrontUser> pageinfo = frontUserService.getPaginationData(params, reqPage, SPLITPAGE_SIZE);
 			model.addAttribute("pageinfo", pageinfo);
 			model.addAttribute("keyword", keyword);
 		} catch (Exception e) {
@@ -73,16 +74,15 @@ public class StudentController extends BaseController {
 	
 	/**
 	 * <p>Title: addOrUpdate</p>
-	 * <p>Description: 添加或修改学员信息页面</p>
-	 * @param id 学员ID,新增学员时，该参数为空，非空时表示修改
+	 * <p>Description: 添加或修改学生信息页面</p>
+	 * @param id 学生ID,新增学生时，该参数为空，非空时表示修改
 	 * @return String
 	 */
 	@RequestMapping("addOrUpdate")
 	public String addOrUpdate(Model model, Integer id){
 		log.info("[addOrUpdate] add or update student form prepare controller .");
-		model.addAttribute("coachList", coachService.selectAll());
 		if(id != null){//addUser
-			SysUser student = userService.selectByPrimaryKey(id);
+			FrontUser student = frontUserService.selectByPrimaryKey(id);
 			model.addAttribute("student", student);
 			return "student/edit";
 		}else{
@@ -93,28 +93,25 @@ public class StudentController extends BaseController {
 	
 	/**
 	 * <p>Title: save</p>
-	 * <p>Description: 保存学员信息，插入或更新</p>
-	 * @param user 学员信息
+	 * <p>Description: 保存学生信息，插入或更新</p>
+	 * @param user 学生信息
 	 * @return String
 	 */
 	@RequestMapping("save")
-	public String save(Model model, RedirectAttributes redirectAttributes, SysUser user){
+	public String save(Model model, RedirectAttributes redirectAttributes, FrontUser student){
 		log.info("[save] save student info (insert or update)");
-		if(user == null){
+		if(student == null){
 			log.error("[save] save student info error, user is null...");
 		}
 		try {
-			if(user.getId() == null){//Insert data into database.
-				user.setCreateTime(new Date());
-				user.setDeleted(false);
-				user.setUserName(user.getPhone());
-				user.setPassword(EncryptUtil.entryptPassword("123456"));
-				user.setType(2);
-				userService.saveUser(user);
+			if(student.getId() == null){//Insert data into database.
+				student.setCreateTime(new Date());
+				student.setDeleted(false);
+				student.setPassword(EncryptUtil.entryptPassword("123456"));
+				frontUserService.insertSelective(student);
 			}else{//update user info
-				if(StringUtils.isNotBlank(user.getPhone()))
-					user.setUserName(user.getPhone());
-				userService.updateUser(user);
+				
+				frontUserService.updateByPrimaryKeySelective(student);
 			}
 			log.info("[save] save student info success...");
 		} catch (Exception e) {
@@ -138,69 +135,15 @@ public class StudentController extends BaseController {
 			log.error("[delete] delete student error, id is null");
 		}else{
 			try {
-				SysUser user = new SysUser();
+				FrontUser user = new FrontUser();
 				user.setId(id);
 				user.setDeleted(true);
-				user.setUpdateTime(new Date());
-				this.userService.updateByPrimaryKeySelective(user);
+			this.frontUserService.updateByPrimaryKeySelective(user);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		return "redirect:/student/list";
 	}
-	
-	@RequestMapping("mycoach")
-	public String mycoach(Model model){
-		log.info("[mycoach] show student`s exam .");
-		try {
-			SysUser student = getCurrentUser();
-			if(student.getCoachId() != null)
-				model.addAttribute("coach", this.coachService.selectByPrimaryKey(student.getCoachId()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "student/mycoach";
-	}
-	
-	/**
-	 * 
-	 * <p>Title: updatePwd</p>
-	 * <p>Description: 修改个人的密码</p>
-	 * @param model
-	 * @param newpwd 新密码
-	 * @param oldpwd 原密码
-	 * @param type 1:页面跳转；2：保存
-	 * @return String
-	 */
-	@RequestMapping("updatePwd")
-	public String updatePwd(Model model, Integer type, String newpwd, String oldpwd) {
-		log.info("[updatePwd] update my password ...");
-		try {
-			SysUser currentUser = getCurrentUser();
-			if(type == null)
-				type = 1;
-			if(type == 2) {
-				if(StringUtil.isEmpty(newpwd)) {
-					model.addAttribute("error", "请输入新密码");
-				} else if(StringUtil.isEmpty(oldpwd)) {
-					model.addAttribute("error", "请输入密码");
-				} else {
-					if(!EncryptUtil.validatePassword(oldpwd, currentUser.getPassword())) { //输入的原密码不正确
-						model.addAttribute("error", "输入的原密码不正确");
-					} else {
-						currentUser.setPassword(EncryptUtil.entryptPassword(newpwd));
-						this.userService.updateByPrimaryKeySelective(currentUser);
-						model.addAttribute("error", "密码修改成功");
-					}
-				}
-			}
-			model.addAttribute("oldpwd", oldpwd);
-			model.addAttribute("newpwd", newpwd);
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.info("[updatePwd] update my password error...");
-		}
-		return "student/updatePwd";
-	}
+
 }

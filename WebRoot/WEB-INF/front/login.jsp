@@ -19,8 +19,8 @@
                 	<img src="${ctxAssets}/images/1.png" width="30" class="aaa">
 					<div class="fengexian1"></div>
 					
-					<input type="text"  name="loginName" id="loginName" placeholder="用户名" onblur="validation('loginName')">
-                    <div class="photoMsg" id="mmLoginNameMsg"></div>
+					<input type="text"  name="studentNo" id="studentNo" placeholder="学号" onblur="validation('loginName')">
+                    <div class="studentNo" id="mmStudentNoMsg"></div>
 				</div>
 				<div class="row3">
                 	<img src="${ctxAssets}/images/a2.png" width="30" class="aaa">
@@ -44,12 +44,12 @@
 function validation(logo) {
 
    
-    if (logo == "loginName") {
+    if (logo == "studentNo") {
 
-        var photo = $("#loginName").val();
-        $(".photoMsg").html("");
+        var photo = $("#studentNo").val();
+        $(".studentNoMsg").html("");
         if (photo == "") {
-            $(".photoMsg").html("用户名不能为空！");
+            $(".studentNoMsg").html("学号不能为空！");
             return false;
         }
         return true;
@@ -77,10 +77,10 @@ function validation(logo) {
 
 }
      function loginPostCheck(){
-    	 var photo = $("#loginName").val();
-         $(".photoMsg").html("");
+    	 var studentNo = $("#studentNo").val();
+         $(".studentNoMsg").html("");
          if (photo == "") {
-             $(".photoMsg").html("用户名不能为空！");
+             $(".studentNoMsg").html("学号不能为空！");
              return false;
          }
          if($.browser.msie){

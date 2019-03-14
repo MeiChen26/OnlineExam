@@ -3,16 +3,14 @@
 <mapper namespace="com.project.exam.dao.f.FrontUserMapper">
   <resultMap id="BaseResultMap" type="com.project.exam.model.f.FrontUser">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="city" jdbcType="VARCHAR" property="city" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="owe_remind" jdbcType="INTEGER" property="oweRemind" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="student_no" jdbcType="VARCHAR" property="studentNo" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, login_name, password, city, address, owe_remind, deleted, create_time
+    id, name, password, deleted, create_time, student_no
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,12 +23,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.project.exam.model.f.FrontUser">
-    insert into front_user (id, login_name, password, 
-      city, address, owe_remind, 
-      deleted, create_time)
-    values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{oweRemind,jdbcType=INTEGER}, 
-      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+    insert into front_user (id, name, password, 
+      deleted, create_time, student_no
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{studentNo,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.project.exam.model.f.FrontUser">
     insert into front_user
@@ -38,20 +36,11 @@
       <if test="id != null">
         id,
       </if>
-      <if test="loginName != null">
-        login_name,
+      <if test="name != null">
+        name,
       </if>
       <if test="password != null">
         password,
-      </if>
-      <if test="city != null">
-        city,
-      </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="oweRemind != null">
-        owe_remind,
       </if>
       <if test="deleted != null">
         deleted,
@@ -59,25 +48,19 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="studentNo != null">
+        student_no,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="loginName != null">
-        #{loginName,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null">
-        #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="oweRemind != null">
-        #{oweRemind,jdbcType=INTEGER},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
@@ -85,25 +68,19 @@
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="studentNo != null">
+        #{studentNo,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.project.exam.model.f.FrontUser">
     update front_user
     <set>
-      <if test="loginName != null">
-        login_name = #{loginName,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="city != null">
-        city = #{city,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="oweRemind != null">
-        owe_remind = #{oweRemind,jdbcType=INTEGER},
       </if>
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
@@ -111,25 +88,65 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="studentNo != null">
+        student_no = #{studentNo,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.project.exam.model.f.FrontUser">
     update front_user
-    set login_name = #{loginName,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      owe_remind = #{oweRemind,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      student_no = #{studentNo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getByCondition" parameterType="com.name.electriccharge.model.FrontUser" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from front_user
-    where login_name=#{loginName} and password=#{password} 
+    where student_no=#{studentNo} and password=#{password} 
     limit 0,1
   </select>
+  <!-- 分页 -->
+	<sql id="limit_sql">
+		<if test="pageinfo.startIndex != null and pageinfo.paginationSize != null">
+			limit #{pageinfo.startIndex},#{pageinfo.paginationSize}
+		</if>
+	</sql>
+	<!-- 排序 -->
+	<sql id="orderby_sql">
+		ORDER BY a.create_time desc
+	</sql>
+  <!-- 获取符合条件的学生信息 分页展示 -->
+  	<select id="getDataList" resultMap="BaseResultMap">
+		SELECT a.*
+		FROM front_user a
+		<where>
+			AND a.deleted=0
+			<if test="pageinfo.params != null">
+				<if test="pageinfo.params.keyword != null">
+					AND a.name like
+					CONCAT('%','${pageinfo.params.keyword}','%' )
+				</if>
+			</if>
+		</where>
+		<include refid="orderby_sql" />
+		<include refid="limit_sql" />
+	</select>
+	<select id="getDataTotalNum" resultType="java.lang.Integer">
+		SELECT count(1)
+		FROM front_user a
+		<where>
+			AND a.deleted=0 
+			<if test="pageinfo.params != null">
+				<if test="pageinfo.params.userName != null">
+					AND a.name like
+					CONCAT('%','${pageinfo.params.keyword}','%' )
+				</if>
+			</if>
+		</where>
+	</select>
 </mapper>

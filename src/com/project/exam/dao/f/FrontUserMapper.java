@@ -15,6 +15,6 @@ public interface FrontUserMapper extends PaginationBaseMapper<FrontUser, Integer
     int updateByPrimaryKeySelective(FrontUser record);
 
     int updateByPrimaryKey(FrontUser record);
-    
-    FrontUser getByCondition(FrontUser frontUser);
+
+	FrontUser getByCondition(FrontUser frontUser);
 }

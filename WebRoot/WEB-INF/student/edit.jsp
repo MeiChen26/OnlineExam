@@ -10,7 +10,7 @@
 <body>
 	<!-- PAGE CONTENT BEGIN -->
 	<div class="right-area">
-		<h3>编辑学员</h3>
+		<h3>编辑学生</h3>
 		<form id="inputForm" name="inputForm"
 			action="${pageContext.request.contextPath}/student/save"
 			method="post">
@@ -18,23 +18,11 @@
 			<table class="table">
 				<tbody>
 					<tr>
-						<th class="first minw120">教练</th>
-						<th class="second maxw300">
-							<div class="select-radio" >
-								<select  name="coachId">
-								   <c:forEach var="coach" items="${coachList}">
-									<option value="${coach.id }" <c:if test="${coach.id eq student.coachId }">selected</c:if> >${coach.name }</option>
-								   </c:forEach>
-								</select>
-							</div>
-						</th>
-					</tr>
-					<tr>
-						<th class="first minw120">学员姓名</th>
+						<th class="first minw120">姓名</th>
 						<th class="second maxw300">
 							<div class="text-input">
-								<input type="text" name="realName" id="realName" maxlength="20"
-									value="${student.realName}" class="required" placeholder="学员姓名"
+								<input type="text" name="name" id="name" maxlength="20"
+									value="${student.name}" class="required" placeholder="姓名"
 									title="必选字段" />
 							</div>
 						</th>
@@ -48,6 +36,18 @@
 							</div>
 						</th>
 					</tr>
+					<tr>
+						<th class="first minw120">密码</th>
+						<th class="second maxw300">
+							<div class="text-input">
+								<input type="password" name="password" id="password" value="${student.password}"
+									class="required" placeholder="设置密码" title="必选字段" /><br /> <input
+									type="password" name="rpassword" id="rpasswordc" value=""
+									class="required" placeholder="确认密码" title="必选字段" />
+							</div>
+						</th>
+					</tr>
+					
 				</tbody>
 			</table>
 			<div class="btn-box">

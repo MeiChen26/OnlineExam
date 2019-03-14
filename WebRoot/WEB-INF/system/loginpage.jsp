@@ -14,7 +14,7 @@
         <div class="header">
             <h1>
 <!--                 <i class="icon-logo"></i> -->
-                <span class="text">驾校综合信息管理系统</span>
+                <span class="text">考试系统后台</span>
             </h1>
         </div>
         <div class="form">
