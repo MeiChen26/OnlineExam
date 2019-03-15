@@ -63,12 +63,8 @@ public class SystemController extends BaseController{
 	 */
 	@RequestMapping({"home",""})
 	public String home(Model model, HttpServletRequest request){
-		SysUser currentUser = (SysUser)request.getSession().getAttribute("currentUser");
 		log.info("[home] home page ... ");
-		if(currentUser.getType() == 1)
-			return "redirect:/student/list";
-		else
-			return "redirect:/exercise/doExercise?subject=1";
+		return "redirect:/student/list";
 	}
 	
 	/**

@@ -1,6 +1,8 @@
 package com.project.exam.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +95,11 @@ public class QuestionService extends PaginationBaseService<TbQuestionMapper, TbQ
 			this.mapper.deleteByPrimaryKey(questionId);
 			this.optionsMapper.deleteByQuestionId(questionId);
 		}
+	}
+
+	public List<TbQuestion> getQuestion() {
+		List<TbQuestion> list = new ArrayList<>();
+		
+		return list;
 	}
 }

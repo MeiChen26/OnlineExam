@@ -173,4 +173,6 @@ public class ExamController extends BaseController {
 		}
 		return "exam/my";
 	}
+	
+	
 }

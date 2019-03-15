@@ -4,8 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>注册</title>
-
+	<title>成绩</title>
 </head>
 <body>
 <div id="main" style="width: 90%;height:77%;">

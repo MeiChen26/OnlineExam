@@ -16,10 +16,18 @@
 		<table class="table">
             <tbody>
                 <tr>
-                    <th class="first minw120">用户名</th>
+                    <th class="first minw120">姓名</th>
                     <th class="second maxw300">
                         <div class="text-input">
-                            <input type="text" name="loginName" id="loginName" value="${frontUser.loginName }" class="required" placeholder="用户名" title="必填字段"/>
+                            <input type="text" name="name" id="name" value="${frontUser.name }" class="required" placeholder="姓名" title="必填字段"/>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="first minw120">学号</th>
+                    <th class="second maxw300">
+                        <div class="text-input">
+                            <input type="text" name="studentNo" value="${frontUser.studentNo}" placeholder="学号" />
                         </div>
                     </th>
                 </tr>
@@ -32,39 +40,7 @@
                         </div>
                     </th>
                 </tr>
-                <tr>
-                    <th class="first minw120">城市</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <select name="city">
-                              <option value="北京" <c:if test='${frontUser.city eq "北京"}'>selected</c:if>>北京</option>
-                              <option value="上海" <c:if test='${frontUser.city eq "上海"}'>selected</c:if>>上海</option>
-                              <option value="广州" <c:if test='${frontUser.city eq "广州"}'>selected</c:if>>广州</option>
-                            </select>
-                            
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="first minw120">地址</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <input type="text" name="address" value="${frontUser.address}" placeholder="地址" />
-                        </div>
-                    </th>
-                </tr>
-               <tr>
-                    <th class="first minw120">欠费提醒</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <select name="oweRemind">
-                              <option value="0" <c:if test="${frontUser.oweRemind eq 0}">selected</c:if> >否</option>
-                              <option value="1" <c:if test="${frontUser.oweRemind eq 1}">selected</c:if> >是</option>
-                            </select>
-                            
-                        </div>
-                    </th>
-                </tr>
+                
             </tbody>
         </table>
         <div class="btn-box">

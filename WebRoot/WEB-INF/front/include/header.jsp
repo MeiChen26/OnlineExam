@@ -74,7 +74,8 @@
 			<div id="nav">
 				<ul>
 					   <li id="toLogin"><a href="${ctx }/toLogin">登录</a></li>
-                       <li id="building"><a href="${ctx }/electricInfo">成绩查询</a></li>
+                       <li id="scoreInfo"><a href="${ctx }/scoreInfo">成绩查询</a></li>
+                       <li id="onlineExam"><a href="${ctx }/onlineExam">在线考试</a></li>
                        <li id="usAbout"><a href="${ctx }/selfCenter">个人中心</a></li>
 				</ul>
 			</div>

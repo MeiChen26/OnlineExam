@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>注册</title>
+	<link href="${ctxAssets}/front/css/geren.css" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" type="text/css" href="${ctxAssets}/front/css/form.css">
 	<script type="text/javascript" src="${ctxAssets}/plugin/jquery/jquery-1.8.3.js"></script>
 	<script type="text/javascript" src="${ctxAssets}/plugin/jquery-validation/js/jquery.validate.min.js"></script>
@@ -15,10 +16,18 @@
 		<table class="table">
             <tbody>
                 <tr>
-                    <th class="first minw120">用户名</th>
+                    <th class="first minw120">姓名</th>
                     <th class="second maxw300">
                         <div class="text-input">
-                            <input type="text" name="loginName" id="loginName" value="" class="required" placeholder="用户名" title="必填字段"/>
+                            <input type="text" name="name" id="name" value="" class="required" placeholder="姓名" title="必填字段"/>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="first minw120">学号</th>
+                    <th class="second maxw300">
+                        <div class="text-input">
+                            <input type="text" name="studentNo" value="" placeholder="学号" class="required" title="必填字段"/>
                         </div>
                     </th>
                 </tr>
@@ -28,27 +37,6 @@
                         <div class="text-input">
                             <input type="password" name="password" id="password" value="" class="required" placeholder="设置密码" title="必填字段"/><br/>
 							<input type="password" name="rpassword" id="rpasswordc" value="" class="required" placeholder="确认密码" title="必填字段"/>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="first minw120">城市</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <select name="city">
-                              <option value="北京">北京</option>
-                              <option value="上海">上海</option>
-                              <option value="广州">广州</option>
-                            </select>
-                            
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="first minw120">地址</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <input type="text" name="address" value="" placeholder="地址" />
                         </div>
                     </th>
                 </tr>
@@ -89,7 +77,7 @@ $(function(){
 	    			            //$("#article").html(data);
 	    			            if("success"==data){
 	    			            	alert("注册成功");
-	    			            setTimeout("location.href='${ctx}/toLogin'",2000);
+	    			            setTimeout("location.href='${ctx}/toLogin'",1000);
 	    			            }else{
 	    			                alert("注册失败");
 	    			            	

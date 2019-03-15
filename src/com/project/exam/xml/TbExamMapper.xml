@@ -4,15 +4,12 @@
   <resultMap id="BaseResultMap" type="com.project.exam.model.TbExam">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="student_id" jdbcType="INTEGER" property="studentId" />
-    <result column="score1" jdbcType="INTEGER" property="score1" />
-    <result column="score2" jdbcType="INTEGER" property="score2" />
-    <result column="score3" jdbcType="INTEGER" property="score3" />
-    <result column="score4" jdbcType="INTEGER" property="score4" />
+    <result column="score" jdbcType="INTEGER" property="score" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, student_id, score1, score2, score3, score4, create_time, update_time
+    id, student_id, score, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,11 +22,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.project.exam.model.TbExam">
-    insert into tb_exam (id, student_id, score1, 
-      score2, score3, score4, 
+    insert into tb_exam (id, student_id, score, 
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{score1,jdbcType=INTEGER}, 
-      #{score2,jdbcType=INTEGER}, #{score3,jdbcType=INTEGER}, #{score4,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.project.exam.model.TbExam">
@@ -41,17 +36,8 @@
       <if test="studentId != null">
         student_id,
       </if>
-      <if test="score1 != null">
-        score1,
-      </if>
-      <if test="score2 != null">
-        score2,
-      </if>
-      <if test="score3 != null">
-        score3,
-      </if>
-      <if test="score4 != null">
-        score4,
+      <if test="score != null">
+        score,
       </if>
       <if test="createTime != null">
         create_time,
@@ -67,17 +53,8 @@
       <if test="studentId != null">
         #{studentId,jdbcType=INTEGER},
       </if>
-      <if test="score1 != null">
-        #{score1,jdbcType=INTEGER},
-      </if>
-      <if test="score2 != null">
-        #{score2,jdbcType=INTEGER},
-      </if>
-      <if test="score3 != null">
-        #{score3,jdbcType=INTEGER},
-      </if>
-      <if test="score4 != null">
-        #{score4,jdbcType=INTEGER},
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -93,17 +70,8 @@
       <if test="studentId != null">
         student_id = #{studentId,jdbcType=INTEGER},
       </if>
-      <if test="score1 != null">
-        score1 = #{score1,jdbcType=INTEGER},
-      </if>
-      <if test="score2 != null">
-        score2 = #{score2,jdbcType=INTEGER},
-      </if>
-      <if test="score3 != null">
-        score3 = #{score3,jdbcType=INTEGER},
-      </if>
-      <if test="score4 != null">
-        score4 = #{score4,jdbcType=INTEGER},
+      <if test="score != null">
+        score = #{score1,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -117,10 +85,7 @@
   <update id="updateByPrimaryKey" parameterType="com.project.exam.model.TbExam">
     update tb_exam
     set student_id = #{studentId,jdbcType=INTEGER},
-      score1 = #{score1,jdbcType=INTEGER},
-      score2 = #{score2,jdbcType=INTEGER},
-      score3 = #{score3,jdbcType=INTEGER},
-      score4 = #{score4,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -144,14 +109,12 @@
   <select id="getDataList" resultMap="BaseResultMap">
 		SELECT e.*, u.real_name realname, u.user_name username
 		FROM tb_exam e
-		left join sys_user u on e.student_id = u.id
+		left join front_user u on e.student_id = u.id
 		<where>
 			and u.deleted = 0 and u.type = 2 
 			<if test="pageinfo.params != null">
 				<if test="pageinfo.params.keyword != null">
-					AND (u.user_name like CONCAT('%','${pageinfo.params.keyword}','%' )
-						or u.real_name like CONCAT('%','${pageinfo.params.keyword}','%' )
-					)
+					AND u.name like CONCAT('%','${pageinfo.params.keyword}','%' )
 				</if>
 			</if>
 		</where>
@@ -161,14 +124,12 @@
 	<select id="getDataTotalNum" resultType="java.lang.Integer">
 		SELECT count(1)
 		FROM tb_exam e
-		left join sys_user u on e.student_id = u.id
+		left join front_user u on e.student_id = u.id
 		<where>
 			and u.deleted = 0 and u.type = 2 
 			<if test="pageinfo.params != null">
 				<if test="pageinfo.params.keyword != null">
-					AND (u.user_name like CONCAT('%','${pageinfo.params.keyword}','%' )
-						or u.real_name like CONCAT('%','${pageinfo.params.keyword}','%' )
-					)
+					AND u.name like CONCAT('%','${pageinfo.params.keyword}','%' )
 				</if>
 			</if>
 		</where>

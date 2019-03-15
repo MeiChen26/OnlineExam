@@ -92,59 +92,28 @@
 					<li class="">
 						<a href="JavaScript:void(0);"> <span
 							class="img-content "></span> <span
-							class="menu-text">学员管理</span>
+							class="menu-text">学生管理</span>
 						</a>
 						<ul class="menu-ul-second">
 							<li class="">
 								<a href="${ctx}/student/list"> <span
 									class="img-content img-map-fengong"></span> <span
-									class="menu-text">学员管理</span>
+									class="menu-text">学生管理</span>
 								</a>
 							</li>
 						</ul>
 					</li>
+					
 					<li class="">
 						<a href="JavaScript:void(0);"> <span
 							class="img-content "></span> <span
-							class="menu-text">教练管理</span>
-						</a>
-						<ul class="menu-ul-second">
-							<li class="">
-								<a href="${ctx}/coach/list"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">教练管理</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="">
-						<a href="JavaScript:void(0);"> <span
-							class="img-content "></span> <span
-							class="menu-text">习题集管理</span>
+							class="menu-text">题库管理</span>
 						</a>
 						<ul class="menu-ul-second">
 							<li class="">
 								<a href="${ctx}/question/list?subject=1"> <span
 									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目一</span>
-								</a>
-							</li>
-							<li class="">
-								<a href="${ctx}/question/list?subject=2"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目二</span>
-								</a>
-							</li>
-							<li class="">
-								<a href="${ctx}/question/list?subject=3"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目三</span>
-								</a>
-							</li>
-							<li class="">
-								<a href="${ctx}/question/list?subject=4"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目四</span>
+									class="menu-text">题库管理</span>
 								</a>
 							</li>
 						</ul>
@@ -152,89 +121,13 @@
 					<li class="">
 						<a href="JavaScript:void(0);"> <span
 							class="img-content "></span> <span
-							class="menu-text">考试成绩管理</span>
+							class="menu-text">成绩管理</span>
 						</a>
 						<ul class="menu-ul-second">
 							<li class="">
 								<a href="${ctx}/exam/list"> <span
 									class="img-content img-map-fengong"></span> <span
-									class="menu-text">考试成绩管理</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-				</c:if>
-				<c:if test="${currentUser.type eq 2 }">
-					<li class="">
-						<a href="JavaScript:void(0);"> <span
-							class="img-content "></span> <span
-							class="menu-text">练习题</span>
-						</a>
-						<ul class="menu-ul-second">
-							<li class="">
-								<a href="${ctx}/exercise/doExercise?subject=1"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目一</span>
-								</a>
-							</li>
-							<li class="">
-								<a href="${ctx}/exercise/list?subject=2"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目二</span>
-								</a>
-							</li>
-							<li class="">
-								<a href="${ctx}/exercise/list?subject=3"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目三</span>
-								</a>
-							</li>
-							<li class="">
-								<a href="${ctx}/exercise/doExercise?subject=4"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">科目四</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="">
-						<a href="JavaScript:void(0);"> <span
-							class="img-content "></span> <span
-							class="menu-text">我的成绩</span>
-						</a>
-						<ul class="menu-ul-second">
-							<li class="">
-								<a href="${ctx}/exam/myexam"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">我的成绩</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="">
-						<a href="JavaScript:void(0);"> <span
-							class="img-content "></span> <span
-							class="menu-text">我的教练</span>
-						</a>
-						<ul class="menu-ul-second">
-							<li class="">
-								<a href="${ctx}/student/mycoach"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">我的教练</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="">
-						<a href="JavaScript:void(0);"> <span
-							class="img-content "></span> <span
-							class="menu-text">密码修改</span>
-						</a>
-						<ul class="menu-ul-second">
-							<li class="">
-								<a href="${ctx}/student/updatePwd"> <span
-									class="img-content img-map-fengong"></span> <span
-									class="menu-text">密码修改</span>
+									class="menu-text">成绩管理</span>
 								</a>
 							</li>
 						</ul>
