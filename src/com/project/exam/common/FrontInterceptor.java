@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.project.exam.model.f.FrontUser;
+import com.project.exam.model.FrontUser;
 
 
 

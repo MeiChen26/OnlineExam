@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.project.exam.controller.BaseController;
+import com.project.exam.model.FrontUser;
 import com.project.exam.model.TbQuestion;
-import com.project.exam.model.f.FrontUser;
 import com.project.exam.service.ExamService;
+import com.project.exam.service.FrontUserService;
 import com.project.exam.service.QuestionService;
-import com.project.exam.service.f.FrontUserService;
 /**
  * 前台controller
  * @author Administrator

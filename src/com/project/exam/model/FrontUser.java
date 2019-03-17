@@ -1,4 +1,4 @@
-package com.project.exam.model.f;
+package com.project.exam.model;
 
 import java.util.Date;
 

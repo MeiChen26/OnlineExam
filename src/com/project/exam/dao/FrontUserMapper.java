@@ -1,7 +1,6 @@
-package com.project.exam.dao.f;
+package com.project.exam.dao;
 
-import com.project.exam.dao.PaginationBaseMapper;
-import com.project.exam.model.f.FrontUser;
+import com.project.exam.model.FrontUser;
 
 public interface FrontUserMapper extends PaginationBaseMapper<FrontUser, Integer>{
     int deleteByPrimaryKey(Integer id);

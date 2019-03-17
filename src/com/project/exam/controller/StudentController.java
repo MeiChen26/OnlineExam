@@ -13,13 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.project.exam.model.SysUser;
-import com.project.exam.model.f.FrontUser;
-import com.project.exam.service.SysUserService;
-import com.project.exam.service.f.FrontUserService;
+import com.project.exam.model.FrontUser;
+import com.project.exam.service.FrontUserService;
 import com.project.utils.EncryptUtil;
 import com.project.utils.PaginationInfo;
-import com.project.utils.StringUtil;
 
 /**
  * 
@@ -43,7 +40,7 @@ public class StudentController extends BaseController {
 	
 	/**
 	 * <p>Title: list</p>
-	 * <p>Description: 学员管理列表</p>
+	 * <p>Description: 学生管理列表</p>
 	 * @param reqPage 请求页，页码
 	 * @param keyword 查询关键字，模糊查询用户名
 	 * @return String

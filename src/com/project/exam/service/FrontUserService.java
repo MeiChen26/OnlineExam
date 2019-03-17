@@ -1,11 +1,10 @@
-package com.project.exam.service.f;
+package com.project.exam.service;
 
 
 import org.springframework.stereotype.Service;
 
-import com.project.exam.dao.f.FrontUserMapper;
-import com.project.exam.model.f.FrontUser;
-import com.project.exam.service.PaginationBaseService;
+import com.project.exam.dao.FrontUserMapper;
+import com.project.exam.model.FrontUser;
 @Service
 public class FrontUserService extends PaginationBaseService<FrontUserMapper, FrontUser, Integer>{
 

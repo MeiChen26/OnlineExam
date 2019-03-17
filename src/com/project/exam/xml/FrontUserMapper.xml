@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.exam.dao.f.FrontUserMapper">
-  <resultMap id="BaseResultMap" type="com.project.exam.model.f.FrontUser">
+<mapper namespace="com.project.exam.dao.FrontUserMapper">
+  <resultMap id="BaseResultMap" type="com.project.exam.model.FrontUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -22,7 +22,7 @@
     delete from front_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.exam.model.f.FrontUser">
+  <insert id="insert" parameterType="com.project.exam.model.FrontUser">
     insert into front_user (id, name, password, 
       deleted, create_time, student_no
       )
@@ -30,7 +30,7 @@
       #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{studentNo,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.project.exam.model.f.FrontUser">
+  <insert id="insertSelective" parameterType="com.project.exam.model.FrontUser">
     insert into front_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.exam.model.f.FrontUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.exam.model.FrontUser">
     update front_user
     <set>
       <if test="name != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.exam.model.f.FrontUser">
+  <update id="updateByPrimaryKey" parameterType="com.project.exam.model.FrontUser">
     update front_user
     set name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -103,7 +103,7 @@
       student_no = #{studentNo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="getByCondition" parameterType="com.name.electriccharge.model.FrontUser" resultMap="BaseResultMap">
+  <select id="getByCondition" parameterType="com.project.exam.model.FrontUser" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from front_user
@@ -142,7 +142,7 @@
 		<where>
 			AND a.deleted=0 
 			<if test="pageinfo.params != null">
-				<if test="pageinfo.params.userName != null">
+				<if test="pageinfo.params.keyword != null">
 					AND a.name like
 					CONCAT('%','${pageinfo.params.keyword}','%' )
 				</if>
