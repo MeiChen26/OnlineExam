@@ -1,5 +1,9 @@
 package com.project.exam.dao;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.project.exam.model.TbQuestion;
@@ -28,4 +32,7 @@ public interface TbQuestionMapper extends PaginationBaseMapper<TbQuestion, Integ
      * @return TbQuestion
      */
     TbQuestion selectNextBySubject(@Param("subject") Integer subject, @Param("preId") Integer preId);
+
+	List<TbQuestion> getExamQuestions(HashSet<Integer> set);
+
 }

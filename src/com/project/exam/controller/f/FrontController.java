@@ -127,8 +127,7 @@ public class FrontController extends BaseController{
 				map.put("reason", "缺少参数");
 				return map;
 			}
-			
-			List<TbQuestion> list = this.questionService.getQuestion();
+			List<TbQuestion> list = this.questionService.getQuestions();
 			Map<String, Object> result = new HashMap<>();
 			result.put("questionlist", list);
 			map.put("code", "000");

@@ -14,6 +14,14 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.project.exam.model.TbQuestion">
     <result column="analysis" jdbcType="LONGVARCHAR" property="analysis" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithOptions" type="com.project.exam.model.TbQuestion">
+    <collection property="options" ofType="com.project.exam.model.TbOptions"  javaType="ArrayList">
+      <id column="option_id" jdbcType="INTEGER" property="id" />
+      <result column="option_content" jdbcType="VARCHAR" property="content" />
+      <result column="option_opt" jdbcType="VARCHAR" property="opt" />
+      <result column="option_rig" jdbcType="DECIMAL" property="rig" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
     id, subject, title, type, answer, attachment, create_time, update_time
   </sql>
@@ -201,5 +209,10 @@
 		</if>
 		order by id asc 
 		limit 0, 1
+	</select>
+	<select id="getExamQuestions" resultMap="ResultMapWithOptions">
+		select q.*, 
+		from tb_question q 
+		left join tb_options o on o.
 	</select>
 </mapper>
