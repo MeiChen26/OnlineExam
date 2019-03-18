@@ -33,6 +33,6 @@ public interface TbQuestionMapper extends PaginationBaseMapper<TbQuestion, Integ
      */
     TbQuestion selectNextBySubject(@Param("subject") Integer subject, @Param("preId") Integer preId);
 
-	List<TbQuestion> getExamQuestions(HashSet<Integer> set);
+	List<TbQuestion> getExamQuestions(@Param("list")HashSet<Integer> set);
 
 }

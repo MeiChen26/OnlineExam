@@ -213,6 +213,9 @@
 	<select id="getExamQuestions" resultMap="ResultMapWithOptions">
 		select q.*, 
 		from tb_question q 
-		left join tb_options o on o.
+		left join tb_options o on o.question_id=q.id where q.id in(
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item}       
+        </foreach> 
 	</select>
 </mapper>

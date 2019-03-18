@@ -57,7 +57,7 @@ public class FrontController extends BaseController{
 		HttpSession e=request.getSession();
     	if (frontUser != null) {
     		e.setAttribute("frontUser", frontUser);
-    		return "front/selfCenter";
+    		return "front/exam";
 			} else {
 			model.addAttribute("message", "用户名或密码错误");
 			return "front/login";
@@ -117,26 +117,14 @@ public class FrontController extends BaseController{
 	 * @param request
 	 * @return Map<String,Object>
 	 */
-	@RequestMapping("getExamQuestion")
-	public Map<String, Object> getExamQuestion(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<>();
+	@RequestMapping("onlineExam")
+	public String getExamQuestion(HttpServletRequest request,Model model) {
 		try {
-			String uid = request.getParameter("uid");
-			if(StringUtils.isBlank(uid)) {
-				map.put("code", "001");
-				map.put("reason", "缺少参数");
-				return map;
-			}
 			List<TbQuestion> list = this.questionService.getQuestions();
-			Map<String, Object> result = new HashMap<>();
-			result.put("questionlist", list);
-			map.put("code", "000");
-			map.put("result", result);
+			model.addAttribute("questionlist", list);
 		} catch (Exception e) {
-			map.put("code", "001");
-			map.put("reason", "");
 			e.printStackTrace();
 		}
-		return map;
+		return "front/exam";
 	}
 }
