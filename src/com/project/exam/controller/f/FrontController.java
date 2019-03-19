@@ -20,10 +20,12 @@ import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.project.exam.controller.BaseController;
 import com.project.exam.model.FrontUser;
+import com.project.exam.model.TbExam;
 import com.project.exam.model.TbQuestion;
 import com.project.exam.service.ExamService;
 import com.project.exam.service.FrontUserService;
 import com.project.exam.service.QuestionService;
+import com.project.utils.PaginationInfo;
 /**
  * 前台controller
  * @author Administrator
@@ -57,13 +59,11 @@ public class FrontController extends BaseController{
 		HttpSession e=request.getSession();
     	if (frontUser != null) {
     		e.setAttribute("frontUser", frontUser);
-    		return "front/exam";
+    		return "redirect:/f/onlineExam";
 			} else {
 			model.addAttribute("message", "用户名或密码错误");
 			return "front/login";
 		}	
-		
-
 	}
 	@RequestMapping(value = "toRegister")
 	public String toRegister() {
@@ -105,10 +105,6 @@ public class FrontController extends BaseController{
 		return "success";
 	}
 	
-	@RequestMapping(value = "onlineExam")
-	public String onlineExam() {
-		return "front/selfCenter";
-	}
 	
 	/**
 	 * 
@@ -126,5 +122,59 @@ public class FrontController extends BaseController{
 			e.printStackTrace();
 		}
 		return "front/exam";
+	}
+	
+	/**
+	 * <p>Title: list</p>
+	 * <p>Description: 考试成绩</p>
+	 * @param reqPage 请求页，页码
+	 * @param keyword 查询关键字
+	 * @return String
+	 */
+	@RequestMapping("/saveScore")
+	public String list(HttpServletRequest request,Model model, Integer score){
+		try {
+			HttpSession e=request.getSession();
+			FrontUser user=(FrontUser) e.getAttribute("frontUser");
+			TbExam exam=new TbExam();
+			exam.setStudentId(user.getId());
+			exam.setScore(score*2);
+			exam.setUpdateTime(new Date());
+			exam.setCreateTime(new Date());
+			examService.insertSelective(exam);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/f/score";
+	}
+	
+	/**
+	 * <p>Title: list</p>
+	 * <p>Description: 考试成绩</p>
+	 * @param reqPage 请求页，页码
+	 * @param keyword 查询关键字
+	 * @return String
+	 */
+	@RequestMapping("/score")
+	public String score(HttpServletRequest request,Model model, Integer reqPage, String keyword){
+		try {
+			//获取请求参数
+			if (reqPage == null) {
+				reqPage = 1;
+			}
+			Map<String, Object> params = new HashMap<String, Object>();
+			if (!StringUtils.isEmpty(keyword)) {
+				params.put("keyword", keyword);
+			}
+			HttpSession e=request.getSession();
+			FrontUser user=(FrontUser) e.getAttribute("frontUser");
+			params.put("studentId", user.getId());
+			PaginationInfo<TbExam> pageinfo = examService.getPaginationData(params, reqPage, SPLITPAGE_SIZE);
+			model.addAttribute("pageinfo", pageinfo);
+			model.addAttribute("keyword", keyword);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "front/score";
 	}
 }

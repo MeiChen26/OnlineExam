@@ -10,12 +10,7 @@
 <body>
 	<!-- PAGE CONTENT BEGIN -->
 	<div class="right-area">
-		<h3>添加
-		<c:if test="${subject eq 1 }">科目一</c:if>
-		<c:if test="${subject eq 2 }">科目二</c:if>
-		<c:if test="${subject eq 3 }">科目三</c:if>
-		<c:if test="${subject eq 4 }">科目四</c:if>
-		</h3>
+		<h3>添加 </h3>
 		<form id="inputForm" name="inputForm"
 			action="${pageContext.request.contextPath}/question/save"
 			method="post" enctype="multipart/form-data">
@@ -109,16 +104,6 @@
 							</th>
 						</tr>
 					</c:if>
-					<c:if test="${subject eq 2 || subject eq 3 }">
-						<tr>
-							<th class="first minw120">上传视频</th>
-							<th class="second maxw300">
-								<div class="text-input">
-									<input type="file" id="attachment" name="multipartFile" >
-								</div>
-							</th>
-						</tr>
-					</c:if>
 				</tbody>
 			</table>
 			<div class="btn-box">
@@ -131,16 +116,6 @@
 	<script type="text/javascript">
 		var path = '${pageContext.request.contextPath}';
 		$(function(){
-			$("#attachment").change(function(){  
-				var s = $('#attachment').val();
-			    var start = s.indexOf(".") + 1;
-			    var name = s.substring(start, s.length).toLowerCase();
-			    if (name != "mp4" && name != "avi") {
-			    	layer.msg("视频格式必须为mp4、avi中的一种");
-			        $('#attachment').val('');
-			        return;
-			    }  
-			});
 			$("#image").change(function(){  
 				var s = $('#image').val();
 			    var start = s.indexOf(".") + 1;
@@ -156,10 +131,6 @@
 				submitHandler:function(form){
 					var subject = $("#subject").val();
 					var s = $('#attachment').val();
-					if(s == '' && (subject == 2 || subject == 3)) {
-						layer.msg("请上传视频");
-						return;
-					}
 			    	if(confirm("确定要提交吗？")){
 						form.submit(); 
 			    	}

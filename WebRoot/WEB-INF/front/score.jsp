@@ -1,43 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/front/include/taglib.jsp"%>
+<%@ include file="/WEB-INF/front/include/header.jsp"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+	<title>首页</title>
 </head>
 <body>
-	<!-- PAGE CONTENT BEGIN -->
-	<div class="content map-content-bg">
-		<div class="content-bg-div content-bg-edit">
-			<div style="width: 100%; overflow: auto">
-				<div class="map-top-div">
-					<form action="${pageContext.request.contextPath}/exam/list" id="selectForm" method="post">
-						<!-- 公用部分 -->
-						<div class="header-box">
-							<h2>考试成绩管理</h2>
-							<ul class="clearfix" style="overflow: hidden;height:45px;margin-top: 10px;">
-								<li class="fl input">
-									关键字:
-									<input type="text" name="keyword" value="${keyword}" placeholder="学员名称/手机号">
-								</li>
-								<li class="fl btn" style="margin-left: 10px;">
-									<input class="active" type="submit" value="查询">
-								</li>
-								<li class="fr btn">
-									<input class="active" type="button" value="添加考试成绩" onclick="url('${pageContext.request.contextPath}/exam/addOrUpdate')">
-	                            </li>
-							</ul>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class="showMap-bg-div">
-			<!-- 表格 -->
+<div  style="width: 100%;height:77%;">
+    <!-- 表格 -->
 			<div class="table-outer" style="height: 65%;">
 				<table class="table-data" border="1" bordercolor="#d9ddde"
 					width="300" cellspacing="0" style="width: 100%">
@@ -68,9 +39,8 @@
 				style="box-sizing: border-box; width: 95%; padding: 40px 50px;">
 				<div class="zxf_pagediv"></div>
 			</div>
-		</div>
-	</div>
-	<!-- PAGE CONTENT END -->
+	
+</div>
 <script type="text/javascript">
 	var path = '${pageContext.request.contextPath}';
 	var totalPageNum = ${pageinfo.totalPageNum};
@@ -92,13 +62,7 @@
         }
     });
 	
-	$(".delete").click(function(){
-		var id = $(this).attr("data-id");
-		if(confirm("确定要删除吗？")){
-			location.href = path+"/exam/delete?id=" + id;
-		}
-	});
-	
-</script>
+</script>	
+<%@ include file="/WEB-INF/front/include/footer.jsp"%>
 </body>
 </html>

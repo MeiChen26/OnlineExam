@@ -7,6 +7,8 @@
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="student_no" jdbcType="VARCHAR" property="studentNo" />
   </resultMap>
   <sql id="Base_Column_List">
     id, student_id, score, create_time, update_time
@@ -107,14 +109,17 @@
 	</sql>
   <!-- 获取符合条件的用户信息 分页展示 -->
   <select id="getDataList" resultMap="BaseResultMap">
-		SELECT e.*, u.real_name realname, u.user_name username
+		SELECT e.*, u.name name, u.student_no student_no
 		FROM tb_exam e
 		left join front_user u on e.student_id = u.id
 		<where>
-			and u.deleted = 0 and u.type = 2 
+			and u.deleted = 0 
 			<if test="pageinfo.params != null">
 				<if test="pageinfo.params.keyword != null">
 					AND u.name like CONCAT('%','${pageinfo.params.keyword}','%' )
+				</if>
+				<if test="pageinfo.params.studentId != null">
+					AND e.student_id=${pageinfo.params.studentId} 
 				</if>
 			</if>
 		</where>
@@ -126,10 +131,13 @@
 		FROM tb_exam e
 		left join front_user u on e.student_id = u.id
 		<where>
-			and u.deleted = 0 and u.type = 2 
+			and u.deleted = 0  
 			<if test="pageinfo.params != null">
 				<if test="pageinfo.params.keyword != null">
 					AND u.name like CONCAT('%','${pageinfo.params.keyword}','%' )
+				</if>
+				<if test="pageinfo.params.studentId != null">
+					AND e.student_id=${pageinfo.params.studentId} 
 				</if>
 			</if>
 		</where>
