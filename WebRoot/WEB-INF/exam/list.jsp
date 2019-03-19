@@ -21,15 +21,15 @@
 							<h2>考试成绩管理</h2>
 							<ul class="clearfix" style="overflow: hidden;height:45px;margin-top: 10px;">
 								<li class="fl input">
-									关键字:
-									<input type="text" name="keyword" value="${keyword}" placeholder="学员名称/手机号">
+									姓名:
+									<input type="text" name="keyword" value="${keyword}">
 								</li>
 								<li class="fl btn" style="margin-left: 10px;">
 									<input class="active" type="submit" value="查询">
 								</li>
-								<li class="fr btn">
+								<%-- <li class="fr btn">
 									<input class="active" type="button" value="添加考试成绩" onclick="url('${pageContext.request.contextPath}/exam/addOrUpdate')">
-	                            </li>
+	                            </li> --%>
 							</ul>
 						</div>
 					</form>

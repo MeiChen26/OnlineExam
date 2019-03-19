@@ -4,7 +4,7 @@
 			<div class="row copyright">
 				<div class="col-md-12 text-center">
 					<p>
-						<small class="block">&copy; 2017-2018 电费平台  All Rights Reserved.</small> 
+						<small class="block">&copy; 2018-2019在线考试系统All Rights Reserved.</small> 
 					</p>
 
 				</div>

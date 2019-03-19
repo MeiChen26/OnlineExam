@@ -35,4 +35,6 @@ public interface TbQuestionMapper extends PaginationBaseMapper<TbQuestion, Integ
 
 	List<TbQuestion> getExamQuestions(@Param("list")HashSet<Integer> set);
 
+	int getTotalNum();
+
 }

@@ -19,14 +19,9 @@
 						<!-- 公用部分 -->
 						<input type="hidden" name="subject" value="${subject }"/>
 						<div class="header-box">
-							<h2>习题集管理 -
-							<c:if test="${subject eq 1 }">科目一</c:if>
-							<c:if test="${subject eq 2 }">科目二</c:if>
-							<c:if test="${subject eq 3 }">科目三</c:if>
-							<c:if test="${subject eq 4 }">科目四</c:if> </h2>
 							<ul class="clearfix" style="overflow: hidden;height:45px;margin-top: 10px;">
 								<li class="fr btn">
-									<input class="active" type="button" value="添加习题集" onclick="url('${pageContext.request.contextPath}/question/addOrUpdate?subject=${subject }')">
+									<input class="active" type="button" value="添加试题" onclick="url('${pageContext.request.contextPath}/question/addOrUpdate?subject=${subject }')">
 	                            </li>
 							</ul>
 						</div>

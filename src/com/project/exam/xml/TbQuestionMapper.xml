@@ -211,11 +211,15 @@
 		limit 0, 1
 	</select>
 	<select id="getExamQuestions" resultMap="ResultMapWithOptions">
-		select q.*, 
+		select q.*,o.id as option_id,o.content as option_content,o.opt as option_opt,o.rig as option_rig
 		from tb_question q 
-		left join tb_options o on o.question_id=q.id where q.id in(
+		left join tb_options o on o.question_id=q.id where q.id in 
 		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
                 #{item}       
         </foreach> 
+	</select>
+	<select id="getTotalNum" resultType="java.lang.Integer">
+		SELECT count(1)
+		FROM tb_question
 	</select>
 </mapper>

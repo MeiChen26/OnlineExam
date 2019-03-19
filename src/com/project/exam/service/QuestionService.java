@@ -99,11 +99,11 @@ public class QuestionService extends PaginationBaseService<TbQuestionMapper, TbQ
 
 	public List<TbQuestion> getQuestions() {
 		List<TbQuestion> list = new ArrayList<>();
-		int count=mapper.getDataTotalNum(null);
+		int count=mapper.getTotalNum();
 		HashSet<Integer> set = new HashSet<>();
-		randomSet(1, count, 50, set);
+		randomSet(1, count, 10, set);
 		list.addAll(mapper.getExamQuestions(set));
-		return null;
+		return list;
 	}
 	
 	/**

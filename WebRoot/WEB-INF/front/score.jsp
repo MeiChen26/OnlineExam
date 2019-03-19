@@ -1,19 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/front/include/taglib.jsp"%>
 <%@ include file="/WEB-INF/front/include/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>首页</title>
+	<title>成绩查询</title>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/plugin/zxf_page/zxf_page.css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugin/zxf_page/zxf_page.js"></script>
 </head>
 <body>
-<div  style="width: 100%;height:77%;">
+<div  style="width: 100%;height:70%;">
     <!-- 表格 -->
-			<div class="table-outer" style="height: 65%;">
-				<table class="table-data" border="1" bordercolor="#d9ddde"
-					width="300" cellspacing="0" style="width: 100%">
+				<table class="table">
 					<thead>
-						<tr class="header">
+						<tr>
 							<td width="5%">序号</td>
 							<td width="20%">学号</td>
 							<td width="10%">姓名</td>
@@ -33,7 +34,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
 			<!-- 分页 -->
 			<div class="toleft"
 				style="box-sizing: border-box; width: 95%; padding: 40px 50px;">
@@ -41,6 +41,7 @@
 			</div>
 	
 </div>
+
 <script type="text/javascript">
 	var path = '${pageContext.request.contextPath}';
 	var totalPageNum = ${pageinfo.totalPageNum};
@@ -62,6 +63,9 @@
         }
     });
 	
+    $(document).ready(function() {
+		$("#score").addClass("active");
+	}); 
 </script>	
 <%@ include file="/WEB-INF/front/include/footer.jsp"%>
 </body>

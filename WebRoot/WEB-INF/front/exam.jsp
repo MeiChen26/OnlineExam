@@ -1,8 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/front/include/taglib.jsp"%>
+<%@ include file="/WEB-INF/front/include/header.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,50 +18,53 @@
 </head>
 <body>
 	<!-- PAGE CONTENT BEGIN -->
-	<div style="width: 100%;height:77%;">
-		<form action="${pageContext.request.contextPath}/f/saveScore" id="form" method="post">
-			<input type="hidden" id="score" name="score" />
-		</form>
-		<table class="table">
-			<tbody>
-				<c:forEach items="${questionlist }" var="question" varStatus="vstatus">
-				<tr>
-					<th class="first minw120"></th>
-					<th class="second maxw300">
-						<span class="text-input exercise-title">
-							${reqPage }、<span style="color: red;font-size: 18px;"><c:if test="${question.type eq 1 }">[单选题]</c:if><c:if test="${question.type eq 2 }">[多选题]</c:if></span>${question.title }
-							<c:if test="${not empty question.attachment}">
-								<br>
-								<img src="${pageContext.request.contextPath}/${question.attachment}" width="275px" 
-									style="margin-left: 5%;margin-top: 1%; float:left;"/>
-							</c:if>
-						</span>
-					</th>
-				</tr>
-				<tr id="vstatus.count">
-					<th class="first minw120"></th>
-					<th class="second maxw300" style="width: 100%;">
-						<c:forEach items="${question.list }" var="option">
-							<div class="exercise-options">
-								${option.opt }、${option.content }
-								<c:if test="${question.type eq 1 }">
-									<input type="radio" name="opt" value="${option.opt }" 
-										data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
+	<div style="width: 100%;height:70%;">
+		<div style="width:100%;height:80%;overflow:auto;">
+			<form action="${pageContext.request.contextPath}/f/saveScore" id="form" method="post">
+				<input type="hidden" id="score" name="score" />
+			</form>
+			<table class="table">
+				<tbody>
+					<c:forEach items="${questionlist}" var="question" varStatus="vstatus">
+					<tr>
+						<th class="first minw120"></th>
+						<th class="second maxw300">
+							<span class="text-input exercise-title">
+								${vstatus.count }、<span style="color: red;font-size: 18px;"><c:if test="${question.type eq 1 }">[单选题]</c:if><c:if test="${question.type eq 2 }">[多选题]</c:if></span>${question.title }
+								<c:if test="${not empty question.attachment}">
+									<br>
+									<img src="${pageContext.request.contextPath}/${question.attachment}" width="275px" 
+										style="margin-left: 5%;margin-top: 1%; float:left;"/>
 								</c:if>
-								<c:if test="${question.type eq 2 }">
-									<input type="checkbox" name="opt" value="${option.opt }" data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
-								</c:if>
-							</div>
-						</c:forEach>
-					</th>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+							</span>
+						</th>
+					</tr>
+					<tr class="${vstatus.count}">
+						<th class="first minw120"></th>
+						<th class="second maxw300" style="width: 100%;">
+							<c:forEach items="${question.options }" var="option">
+								<div class="exercise-options">
+									${option.opt }、${option.content }
+									<c:if test="${question.type eq 1 }">
+										<input type="radio" name="opt" value="${option.opt }" 
+											data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
+									</c:if>
+									<c:if test="${question.type eq 2 }">
+										<input type="checkbox" name="opt" value="${option.opt }" data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
+									</c:if>
+								</div>
+							</c:forEach>
+						</th>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
 		<div class="btn-box">
 			<span id="tTime"></span>
-			<span id="examTimes" style="dispaly:none">5400</span>
-			<input type="button" value="交卷" onclick="">
+			<span id="examTimes" style="display:none;">5400</span>
+			<input type="button" value="交卷" onclick="hand();">
 		</div>
 	</div>
 	<!-- PAGE CONTENT END -->
@@ -135,4 +136,5 @@
 		
 	</script>
 </body>
+<%@ include file="/WEB-INF/front/include/footer.jsp"%>
 </html>

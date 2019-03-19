@@ -8,7 +8,7 @@
 	<link href="${ctxAssets}/front/css/geren.css" rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div class="dl_bg" style="height:80%;">
+<div class="dl_bg" style="height:70%;">
 <section id="mima_login">
 
 			<!-- 密码登录 -->	
@@ -103,4 +103,5 @@ function validation(logo) {
      }
 </script>
 </body>
+<%@ include file="/WEB-INF/front/include/footer.jsp"%>
 </html>

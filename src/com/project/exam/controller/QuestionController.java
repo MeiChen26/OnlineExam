@@ -29,7 +29,7 @@ import com.project.utils.PaginationInfo;
 /**
  * 
  * <p>ClassName: CoachController</p>
- * <p>Description: 习题集管理</p>
+ * <p>Description: 试题管理</p>
  * @Author  
  * @Date: 
  */
@@ -37,9 +37,6 @@ import com.project.utils.PaginationInfo;
 @RequestMapping("/question")
 public class QuestionController extends BaseController {
 	static final Logger log = LoggerFactory.getLogger(QuestionController.class);
-	/**
-	 * @Fields SPLITPAGE_SIZE : 用户管理分页，每页的数目
-	 */
 	public static final int SPLITPAGE_SIZE = 10;
 	
 	@Autowired
@@ -49,7 +46,7 @@ public class QuestionController extends BaseController {
 	
 	/**
 	 * <p>Title: list</p>
-	 * <p>Description: 习题集管理列表</p>
+	 * <p>Description: 试题列表</p>
 	 * @param reqPage 请求页，页码
 	 * @param keyword 查询关键字，模糊查询用户名
 	 * @return String
@@ -76,8 +73,8 @@ public class QuestionController extends BaseController {
 	
 	/**
 	 * <p>Title: addOrUpdate</p>
-	 * <p>Description: 添加或修改习题集信息页面</p>
-	 * @param id 习题集ID,新增习题集时，该参数为空，非空时表示修改
+	 * <p>Description: 添加或修改试题信息页面</p>
+	 * @param id 试题ID,新增试题时，该参数为空，非空时表示修改
 	 * @return String
 	 */
 	@RequestMapping("addOrUpdate")
@@ -124,8 +121,8 @@ public class QuestionController extends BaseController {
 	
 	/**
 	 * <p>Title: save</p>
-	 * <p>Description: 保存习题集信息，插入或更新</p>
-	 * @param question 习题集信息
+	 * <p>Description: 保存试题信息，插入或更新</p>
+	 * @param question 试题信息
 	 * @return String
 	 */
 	@RequestMapping("save")
@@ -170,7 +167,7 @@ public class QuestionController extends BaseController {
 	
 	/**
 	 * <p>Title: delete</p>
-	 * <p>Description: 根据ID删除习题集</p>
+	 * <p>Description: 根据ID删除试题</p>
 	 * @param redirectAttributes
 	 * @param id
 	 * @return String

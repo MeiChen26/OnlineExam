@@ -21,15 +21,11 @@ public class SysUser implements Serializable{
 
     private Integer type;
 
-    private Integer coachId;
-
     private Boolean deleted;
 
     private Date createTime;
 
     private Date updateTime;
-    
-    private String coachName; //教练名称
 
     public Integer getId() {
         return id;
@@ -79,13 +75,6 @@ public class SysUser implements Serializable{
         this.type = type;
     }
 
-    public Integer getCoachId() {
-        return coachId;
-    }
-
-    public void setCoachId(Integer coachId) {
-        this.coachId = coachId;
-    }
 
     public Boolean getDeleted() {
         return deleted;
@@ -111,11 +100,4 @@ public class SysUser implements Serializable{
         this.updateTime = updateTime;
     }
 
-	public String getCoachName() {
-		return coachName;
-	}
-
-	public void setCoachName(String coachName) {
-		this.coachName = coachName;
-	}
 }

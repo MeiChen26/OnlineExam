@@ -8,14 +8,12 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="coach_id" jdbcType="INTEGER" property="coachId" />
-    <result column="coach_name" jdbcType="VARCHAR" property="coachName" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_name, real_name, password, phone, type, coach_id, deleted, create_time, 
+    id, user_name, real_name, password, phone, type, deleted, create_time, 
     update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -34,11 +32,11 @@
 	</selectKey>
     insert into sys_user (id, user_name, real_name, 
       password, phone, type, 
-      coach_id, deleted, create_time, 
+       deleted, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{coachId,jdbcType=INTEGER}, #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.project.exam.model.SysUser">
@@ -64,9 +62,6 @@
       </if>
       <if test="type != null">
         type,
-      </if>
-      <if test="coachId != null">
-        coach_id,
       </if>
       <if test="deleted != null">
         deleted,
@@ -97,9 +92,6 @@
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="coachId != null">
-        #{coachId,jdbcType=INTEGER},
-      </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
       </if>
@@ -129,9 +121,6 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="coachId != null">
-        coach_id = #{coachId,jdbcType=INTEGER},
-      </if>
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
@@ -151,7 +140,6 @@
       password = #{password,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      coach_id = #{coachId,jdbcType=INTEGER},
       deleted = #{deleted,jdbcType=BIT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
@@ -174,9 +162,8 @@
 	</sql>
   <!-- 获取符合条件的用户信息 分页展示 -->
   <select id="getDataList" resultMap="BaseResultMap">
-		SELECT su.*, coach.name as coach_name
+		SELECT su.*
 		FROM sys_user su
-		left join tb_coach coach on su.coach_id=coach.id
 		<where>
 			AND su.deleted=0 and su.id != 1
 			<if test="pageinfo.params != null">

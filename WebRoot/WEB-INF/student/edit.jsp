@@ -28,10 +28,10 @@
 						</th>
 					</tr>
 					<tr>
-						<th class="first minw120">手机号</th>
+						<th class="first minw120">学号</th>
 						<th class="second maxw300">
 							<div class="text-input">
-								<input type="text" class="required" name="phone" value="${student.phone}" maxlength="20"
+								<input type="text" class="required" name="studentNo" value="${student.studentNo}" maxlength="20"
 									placeholder="手机号" />
 							</div>
 						</th>
