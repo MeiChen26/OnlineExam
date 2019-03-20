@@ -18,7 +18,7 @@
 			<table class="table" id="table">
 				<tbody>
 					<tr>
-						<th class="first minw120">学员</th>
+						<th class="first minw120">姓名</th>
 						<th class="second maxw300">
 							<div class="select-radio" >
 								<select  name="studentId" id="stuId" onchange="getexam()">

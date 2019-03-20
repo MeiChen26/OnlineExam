@@ -63,7 +63,7 @@
 		
 		<div class="btn-box">
 			<span id="tTime"></span>
-			<span id="examTimes" style="display:none;">5400</span>
+			<span id="examTimes" style="display:none;">600</span>
 			<input type="button" value="交卷" onclick="hand();">
 		</div>
 	</div>
@@ -76,7 +76,7 @@
 		        //var exam = parseInt("${examTime}");
 		        var examTime = parseInt(examTimes.innerHTML);  
 		        var examTimeLength;//考试时长
-		        examTimeLength = 90*60; //单位秒
+		        examTimeLength = 10*60; //单位秒
 		        if ((examTime)<0){
 		            alert("考试时间到!\n即将提交试卷!");
 		            hand();
@@ -102,10 +102,10 @@
 		//交卷
 		function hand() {
 			var score=0;
-			for (var i=0;i<50;i++)
+			for (var i=0;i<10;i++)
 			{ 
 				var type = $("."+i+" input[name='type']").val();
-				var flag = -1;
+				var flag = 0;
 				if(type == 1) { //单选
 				 	$("."+i+" input[name='opt']:radio").each(function(i){
 				    	if($(this).is(":checked")) {
@@ -128,9 +128,9 @@
 					});
 				}
 				score=score+flag;
+			}
 				$("#score").val(score);
 				$("#form").submit();
-			}
 			
 		}
 		

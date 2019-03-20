@@ -118,6 +118,7 @@ public class FrontController extends BaseController{
 		try {
 			List<TbQuestion> list = this.questionService.getQuestions();
 			model.addAttribute("questionlist", list);
+			request.getSession().setMaxInactiveInterval(100 * 60);//设置session失效时间
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -132,13 +133,14 @@ public class FrontController extends BaseController{
 	 * @return String
 	 */
 	@RequestMapping("/saveScore")
-	public String list(HttpServletRequest request,Model model, Integer score){
+	public String list(HttpServletRequest request,Model model, String score){
 		try {
 			HttpSession e=request.getSession();
 			FrontUser user=(FrontUser) e.getAttribute("frontUser");
 			TbExam exam=new TbExam();
 			exam.setStudentId(user.getId());
-			exam.setScore(score*2);
+			System.out.println(Integer.valueOf(score));
+			exam.setScore(Integer.valueOf(score)*2);
 			exam.setUpdateTime(new Date());
 			exam.setCreateTime(new Date());
 			examService.insertSelective(exam);
