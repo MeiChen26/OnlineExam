@@ -45,7 +45,7 @@ public class FrontController extends BaseController{
 	
 	@RequestMapping(value = "index")
 	public String index(Model model) {		
-		return "front/index";
+		return "redirect:/f/onlineExam";
 	}
 	
 	@RequestMapping(value = "toLogin")
@@ -133,14 +133,13 @@ public class FrontController extends BaseController{
 	 * @return String
 	 */
 	@RequestMapping("/saveScore")
-	public String list(HttpServletRequest request,Model model, String score){
+	public String list(HttpServletRequest request,Model model, Integer examscore){
 		try {
 			HttpSession e=request.getSession();
 			FrontUser user=(FrontUser) e.getAttribute("frontUser");
 			TbExam exam=new TbExam();
 			exam.setStudentId(user.getId());
-			System.out.println(Integer.valueOf(score));
-			exam.setScore(Integer.valueOf(score)*2);
+			exam.setScore(examscore*2);
 			exam.setUpdateTime(new Date());
 			exam.setCreateTime(new Date());
 			examService.insertSelective(exam);

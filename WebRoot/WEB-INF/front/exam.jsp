@@ -6,12 +6,12 @@
 <head>
 <style type="text/css">
 	.exercise-title{
-		font-size: 25px;
+		font-size: 16px;
     	font-weight: bold;
 	}
 	.exercise-options{
 		margin-left: 40px;
-    	font-size: 18px;
+    	font-size: 14px;
     	margin-bottom: 8px;
 	}
 </style>
@@ -19,13 +19,14 @@
 <body>
 	<!-- PAGE CONTENT BEGIN -->
 	<div style="width: 100%;height:70%;">
-		<div style="width:100%;height:80%;overflow:auto;">
+		<div style="width:100%;height:90%;overflow:auto;">
 			<form action="${pageContext.request.contextPath}/f/saveScore" id="form" method="post">
-				<input type="hidden" id="score" name="score" />
+				<input type="hidden" id="examscore" name="examscore" value="0"/>
 			</form>
 			<table class="table">
 				<tbody>
 					<c:forEach items="${questionlist}" var="question" varStatus="vstatus">
+						<input type="hidden"  name="type${vstatus.count}" value="${question.type}"/>
 					<tr>
 						<th class="first minw120"></th>
 						<th class="second maxw300">
@@ -46,11 +47,11 @@
 								<div class="exercise-options">
 									${option.opt }、${option.content }
 									<c:if test="${question.type eq 1 }">
-										<input type="radio" name="opt" value="${option.opt }" 
+										<input type="radio" name="opt${vstatus.count}" value="${option.opt }" 
 											data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
 									</c:if>
 									<c:if test="${question.type eq 2 }">
-										<input type="checkbox" name="opt" value="${option.opt }" data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
+										<input type="checkbox" name="opt${vstatus.count}" value="${option.opt }" data-rig="<c:if test='${option.rig }'>1</c:if><c:if test='${!option.rig }'>0</c:if>">
 									</c:if>
 								</div>
 							</c:forEach>
@@ -61,9 +62,9 @@
 			</table>
 		</div>
 		
-		<div class="btn-box">
+		<div style="float:right;margin-right:40px;font-size: 16px;">
 			<span id="tTime"></span>
-			<span id="examTimes" style="display:none;">600</span>
+			<span id="examTimes" style="display:none;">5400</span>
 			<input type="button" value="交卷" onclick="hand();">
 		</div>
 	</div>
@@ -76,7 +77,7 @@
 		        //var exam = parseInt("${examTime}");
 		        var examTime = parseInt(examTimes.innerHTML);  
 		        var examTimeLength;//考试时长
-		        examTimeLength = 10*60; //单位秒
+		        examTimeLength = 90*60; //单位秒
 		        if ((examTime)<0){
 		            alert("考试时间到!\n即将提交试卷!");
 		            hand();
@@ -102,19 +103,19 @@
 		//交卷
 		function hand() {
 			var score=0;
-			for (var i=0;i<10;i++)
+			for (var i=1;i<11;i++)
 			{ 
-				var type = $("."+i+" input[name='type']").val();
+				var type = $("input[name='type"+i+"']").val();
 				var flag = 0;
 				if(type == 1) { //单选
-				 	$("."+i+" input[name='opt']:radio").each(function(i){
+				 	$("input[name='opt"+i+"']:radio").each(function(i){
 				    	if($(this).is(":checked")) {
-				    		flag = $(this).attr("data-rig");
+				    		flag = parseInt($(this).attr("data-rig"));
 				    	}
 					});
 				} else if(type == 2) {//复选
 					flag = 1;
-					$("."+i+" input[name='opt']:checkbox").each(function(i){
+					$("input[name='opt"+i+"']:checkbox").each(function(i){
 						var rig = $(this).attr("data-rig");
 				    	if($(this).is(":checked")) {
 				    		if(rig == 0) { //选中，但不是标准答案，错误
@@ -129,10 +130,13 @@
 				}
 				score=score+flag;
 			}
-				$("#score").val(score);
+				$("#examscore").val(score);
 				$("#form").submit();
 			
 		}
+		$(document).ready(function() {
+			$("#onlineExam").addClass("active");
+		});
 		
 	</script>
 </body>

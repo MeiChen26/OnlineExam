@@ -57,7 +57,7 @@
 								<td>${exam.studentNo}</td>
 								<td>${exam.name}</td>
 								<td>${exam.score}</td>
-								<td>${exam.createTime}</td>
+								<td><fmt:formatDate value="${exam.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>

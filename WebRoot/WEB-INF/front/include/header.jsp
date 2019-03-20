@@ -52,8 +52,8 @@
 			</c:when>
 			<c:otherwise>
 			<a href="${ctx}/toRegister"><span class="e34b16Color">注 册</span></a>
-			<span class="fenge_line">|</span>			
-			<a href="${ctx}/toLogin"><span class="e34b16Color ak2">登 录</span></a>
+			<%-- <span class="fenge_line">|</span>			
+			<a href="${ctx}/toLogin"><span class="e34b16Color ak2">登 录</span></a> --%>
 			</c:otherwise>
 			</c:choose>
 			<span class="huColor" style="display: none;">帮助中心</span>
@@ -73,10 +73,10 @@
 <!--                </div> -->
 			<div id="nav">
 				<ul>
-					   <li id="toLogin"><a href="${ctx }/toLogin">登录</a></li>
+<%-- 					   <li id="toLogin"><a href="${ctx }/toLogin">登录</a></li> --%>
                        <li id="score"><a href="${ctx }/score">成绩查询</a></li>
                        <li id="onlineExam"><a href="${ctx }/onlineExam">在线考试</a></li>
-                       <li id="usAbout"><a href="${ctx }/selfCenter">个人中心</a></li>
+                       <li id="selfCenter"><a href="${ctx }/selfCenter">个人中心</a></li>
 				</ul>
 			</div>
 		</div> 

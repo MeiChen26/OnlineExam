@@ -98,40 +98,16 @@ public class QuestionService extends PaginationBaseService<TbQuestionMapper, TbQ
 	}
 
 	public List<TbQuestion> getQuestions() {
-		List<TbQuestion> list = new ArrayList<>();
-		int count=mapper.getTotalNum();
-		HashSet<Integer> set = new HashSet<>();
-		randomSet(1, count, 10, set);
-		list.addAll(mapper.getExamQuestions(set));
-		return list;
+		List<TbQuestion> list1= new ArrayList<>();
+		List<TbQuestion> list2= new ArrayList<>();
+		list1=mapper.findAll();
+		int random;
+		for (int i = 0; i < 10; i++) {
+			random=(int) (Math.random() * (list1.size()));
+			list2.add(list1.get(random));
+			list1.remove(random);
+		}
+		return list2;
 	}
 	
-	/**
-	 * 
-	 * <p>Title: randomSet</p>
-	 * <p>
-	 * Description:
-	 * 随机指定范围内N个不重复的数 
-	 * 利用HashSet的特征，只能存放不同的值
-	 * </p>
-	 * @param min 指定范围最小值
-	 * @param max 指定范围最大值
-	 * @param n 随机数个数
-	 * @param set  随机数结果集
-	 */
-	 public void randomSet(int min, int max, int n, HashSet<Integer> set) {  
-		   if (n > (max - min + 1) || max < min) {
-		       return;
-		   }
-		   for (int i = 0; i < n; i++) {
-		       //调用Math.random()方法 
-		       int num = (int) (Math.random() * (max - min)) + min;
-		       set.add(num);//将不同的数存入HashSet中
-		   }
-		   int setSize = set.size();
-		   //如果存入的数小于指定生成的个数，则调用递归再生成剩余个数的随机数，如此循环，直到达到指定大小
-		   if (setSize < n) {
-			   randomSet(min, max, n - setSize, set);//递归
-		   }
-    }
 }

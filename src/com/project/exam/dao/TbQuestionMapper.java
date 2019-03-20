@@ -37,4 +37,6 @@ public interface TbQuestionMapper extends PaginationBaseMapper<TbQuestion, Integ
 
 	int getTotalNum();
 
+	List<TbQuestion> findAll();
+
 }

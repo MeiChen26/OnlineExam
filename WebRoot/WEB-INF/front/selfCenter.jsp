@@ -52,7 +52,7 @@
 <script type="text/javascript">
 var path = '${pageContext.request.contextPath}';
 $(function(){
-	
+	$("#selfCenter").addClass("active");
 	$("#inputForm").validate({
 		
 		submitHandler:function(form){ 
@@ -99,6 +99,7 @@ $(function(){
 		}
 	});
 });
+
 </script>
 <%@ include file="/WEB-INF/front/include/footer.jsp"%>
 </body>
