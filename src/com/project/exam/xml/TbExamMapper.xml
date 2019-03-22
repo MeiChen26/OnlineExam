@@ -142,4 +142,20 @@
 			</if>
 		</where>
 	</select>
+	<select id="findList" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT e.*, u.name name, u.student_no student_no
+		FROM tb_exam e
+		left join front_user u on e.student_id = u.id
+		<where>
+			and u.deleted = 0 
+			
+			<if test="keyword != null">
+				AND u.name like CONCAT('%','${keyword}','%' )
+			</if>
+			<if test="studentId != null">
+				AND e.student_id=${studentId} 
+			</if>
+		</where>
+		<include refid="orderby_sql" />
+	</select>
 </mapper>

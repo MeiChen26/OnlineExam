@@ -1,5 +1,8 @@
 package com.project.exam.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.project.exam.model.TbExam;
@@ -18,4 +21,6 @@ public interface TbExamMapper extends PaginationBaseMapper<TbExam, Integer>{
     int updateByPrimaryKey(TbExam record);
 
 	TbExam selectByStuId(@Param("studentId")Integer studentId);
+
+	List<TbExam> findList(Map<String, Object> params);
 }

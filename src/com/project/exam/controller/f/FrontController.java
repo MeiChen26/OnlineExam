@@ -74,6 +74,7 @@ public class FrontController extends BaseController{
 	@ResponseBody
 	public String register(Model model,FrontUser frontUser) {
 		frontUser.setCreateTime(new Date());
+		frontUser.setDeleted(false);
 		try {
 			frontUserService.insert(frontUser);
 		} catch (Exception e) {

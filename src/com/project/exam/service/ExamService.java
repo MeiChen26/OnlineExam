@@ -1,5 +1,8 @@
 package com.project.exam.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.project.exam.dao.TbExamMapper;
@@ -17,6 +20,10 @@ public class ExamService extends PaginationBaseService<TbExamMapper, TbExam, Int
 
 	public TbExam selectByStuId(Integer studentId) {
 		return this.mapper.selectByStuId(studentId);
+	}
+
+	public List<TbExam> findList(Map<String, Object> params) {
+		return mapper.findList(params);
 	}
 
 

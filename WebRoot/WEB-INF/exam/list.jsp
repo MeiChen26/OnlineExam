@@ -27,9 +27,9 @@
 								<li class="fl btn" style="margin-left: 10px;">
 									<input class="active" type="submit" value="查询">
 								</li>
-								<%-- <li class="fr btn">
-									<input class="active" type="button" value="添加考试成绩" onclick="url('${pageContext.request.contextPath}/exam/addOrUpdate')">
-	                            </li> --%>
+								<li class="fr btn">
+									<input class="active" type="button" value="导出成绩" onclick="exportData();">
+	                            </li>
 							</ul>
 						</div>
 					</form>
@@ -98,6 +98,23 @@
 			location.href = path+"/exam/delete?id=" + id;
 		}
 	});
+	function exportData(){
+		$.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: path+"/exam/exportData" ,//url
+                data: $('#selectForm').serialize(),
+                success: function (result) {
+ //                   console.log(result);//打印服务端返回的数据(调试用)
+ 						alert(result);
+                   
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+	}
 	
 </script>
 </body>
