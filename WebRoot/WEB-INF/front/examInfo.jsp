@@ -37,7 +37,7 @@
 						<th class="first minw120"></th>
 						<th class="second maxw300">
 							<span class="text-input exercise-title">
-								${vstatus.count }、<span style="color: red;font-size: 18px;"><c:if test="${question.type eq 1 }">[单选题]</c:if><c:if test="${question.type eq 2 }">[多选题]</c:if></span>${question.title }
+								${question.sort }、<span style="color: red;font-size: 18px;"><c:if test="${question.type eq 1 }">[单选题]</c:if><c:if test="${question.type eq 2 }">[多选题]</c:if></span>${question.title }
 								<c:if test="${not empty question.attachment}">
 									<br>
 									<img src="${pageContext.request.contextPath}/${question.attachment}" width="275px" 

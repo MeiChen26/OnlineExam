@@ -31,6 +31,8 @@ public class TbQuestion {
     
     private Integer isRight;
     
+    private Integer sort;
+    
     private List<TbOptions> options = new ArrayList<>();
 
     public Integer getId() {
@@ -144,6 +146,14 @@ public class TbQuestion {
 
 	public void setIsRight(Integer isRight) {
 		this.isRight = isRight;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	
 	
