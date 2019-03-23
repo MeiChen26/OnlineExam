@@ -185,8 +185,7 @@ public class ExamController extends BaseController {
 	 * @return String
 	 */
 	@RequestMapping("/exportData")
-	@ResponseBody
-	public String exportData(HttpServletResponse response,Model model,String keyword){
+	public void exportData(HttpServletResponse response,Model model,String keyword,String studentId){
 		log.info("[list] export exam... ");
 		try {
 			
@@ -194,9 +193,12 @@ public class ExamController extends BaseController {
 			if (!StringUtils.isEmpty(keyword)) {
 				params.put("keyword", keyword);
 			}
+			if (!StringUtils.isEmpty(studentId)) {
+				params.put("studentId", studentId);
+			}
 			
 			List<TbExam> list = examService.findList(params);
-			String title = "scoreData";
+			String title = "成绩表";
             String[] rowsName = new String[]{"序号","学号","姓名","成绩","考试时间"};
             List<Object[]>  dataList = new ArrayList<Object[]>();
             Object[] objs = null;
@@ -212,13 +214,11 @@ public class ExamController extends BaseController {
                 objs[4] = date;
                 dataList.add(objs);
             }
-            ExportExcel ex = new ExportExcel(title, rowsName, dataList,response);
+            ExportExcel ex = new ExportExcel("成绩",title, rowsName, dataList,response);
             ex.export();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "{result:fail}";
 		}
-		return "{result:success}";
 	}
 	
 	

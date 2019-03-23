@@ -8,10 +8,24 @@
 	<title>成绩查询</title>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/plugin/zxf_page/zxf_page.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugin/zxf_page/zxf_page.js"></script>
+	<style type="text/css">
+	.buttonactive{
+	 	background-color: #1f78ed;
+		border: 1px solid #1f78ed;
+		color: #fff;
+		font-size: 12px;
+		padding: 5px 10px;
+		line-height: 20px;
+	 }
+	</style>
 </head>
 <body>
-<div  style="width: 100%;height:70%;">
-    <!-- 表格 -->
+<div  style="width: 100%;height:70%; border-top:solid 1px #ddd;" >
+			<form action="" id="selectForm" style="float:right;padding-right:50px;padding-top:20px;">
+				<input name="studentId" type="hidden" value="${frontUser.id }" >
+				<input class="buttonactive" type="button" value="导出成绩" onclick="exportData();">
+			</form>
+    		<!-- 表格 -->
 				<table class="table">
 					<thead>
 						<tr>
@@ -65,7 +79,10 @@
 	
     $(document).ready(function() {
 		$("#score").addClass("active");
-	}); 
+	});
+    function exportData(){
+		$("#selectForm").attr("action",path+"/exam/exportData").submit();
+    }	
 </script>	
 <%@ include file="/WEB-INF/front/include/footer.jsp"%>
 </body>

@@ -14,6 +14,14 @@
     	font-size: 14px;
     	margin-bottom: 8px;
 	}
+	.buttonactive{
+	 	background-color: #1f78ed;
+		border: 1px solid #1f78ed;
+		color: #fff;
+		font-size: 12px;
+		padding: 5px 10px;
+		line-height: 20px;
+	 }
 </style>
 </head>
 <body>
@@ -65,7 +73,7 @@
 		<div style="float:right;margin-right:40px;font-size: 16px;">
 			<span id="tTime"></span>
 			<span id="examTimes" style="display:none;">5400</span>
-			<input type="button" value="交卷" onclick="hand();">
+			<input type="button" class="buttonactive" value="交卷" onclick="hand();">
 		</div>
 	</div>
 	<!-- PAGE CONTENT END -->

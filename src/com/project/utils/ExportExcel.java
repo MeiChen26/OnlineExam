@@ -20,6 +20,8 @@ import org.apache.poi.ss.util.CellRangeAddress;
 public class ExportExcel {
 	//显示的导出表的标题
     private String title;
+    //显示的导出表的标题
+    private String dataName;
     //导出表的列名
     private String[] rowName ;
     
@@ -28,10 +30,11 @@ public class ExportExcel {
     HttpServletResponse  response;
     
     //构造方法，传入要导出的数据
-    public ExportExcel(String title,String[] rowName,List<Object[]>  dataList,HttpServletResponse response){
+    public ExportExcel(String dataName,String title,String[] rowName,List<Object[]>  dataList,HttpServletResponse response){
         this.dataList = dataList;
         this.rowName = rowName;
         this.title = title;
+        this.dataName = dataName;
         this.response=response;
     }
             
@@ -119,10 +122,11 @@ public class ExportExcel {
             if(workbook !=null){
                 try
                 {
-                    String fileName = "Excel-" + String.valueOf(System.currentTimeMillis()).substring(4, 13) + ".xls";
+                    String fileName = new String(dataName.getBytes(), "iso8859-1")+"Excel-" + String.valueOf(System.currentTimeMillis()).substring(4, 13) + ".xls";
                     String headStr = "attachment; filename=\"" + fileName + "\"";
                     response.setContentType("APPLICATION/OCTET-STREAM");
                     response.setHeader("Content-Disposition", headStr);
+                    response.setCharacterEncoding("UTF-8");
                     OutputStream out = response.getOutputStream();
                     workbook.write(out);
                 }
