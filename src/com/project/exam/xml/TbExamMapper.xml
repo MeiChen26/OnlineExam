@@ -30,6 +30,9 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.project.exam.model.TbExam">
+  	<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tb_exam
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

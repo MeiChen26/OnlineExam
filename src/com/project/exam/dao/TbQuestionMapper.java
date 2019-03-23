@@ -3,6 +3,7 @@ package com.project.exam.dao;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -38,5 +39,7 @@ public interface TbQuestionMapper extends PaginationBaseMapper<TbQuestion, Integ
 	int getTotalNum();
 
 	List<TbQuestion> findAll();
+
+	List<TbQuestion> findExamList(Map<String, Object> params);
 
 }

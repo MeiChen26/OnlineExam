@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.exam.common.Configuration;
 import com.project.exam.dao.TbOptionsMapper;
 import com.project.exam.dao.TbQuestionMapper;
 import com.project.exam.model.TbOptions;
@@ -102,12 +104,17 @@ public class QuestionService extends PaginationBaseService<TbQuestionMapper, TbQ
 		List<TbQuestion> list2= new ArrayList<>();
 		list1=mapper.findAll();
 		int random;
-		for (int i = 0; i < 10; i++) {
+		int exam_size=Integer.valueOf(Configuration.get("exam_size"));
+		for (int i = 0; i < exam_size; i++) {
 			random=(int) (Math.random() * (list1.size()));
 			list2.add(list1.get(random));
 			list1.remove(random);
 		}
 		return list2;
+	}
+
+	public List<TbQuestion> findExamList(Map<String, Object> params) {
+		return mapper.findExamList(params);
 	}
 	
 }

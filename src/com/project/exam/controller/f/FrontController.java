@@ -1,5 +1,6 @@
 package com.project.exam.controller.f;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,10 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
+import com.project.exam.common.Configuration;
 import com.project.exam.controller.BaseController;
 import com.project.exam.model.FrontUser;
 import com.project.exam.model.TbExam;
+import com.project.exam.model.TbExamInfo;
 import com.project.exam.model.TbQuestion;
+import com.project.exam.service.ExamInfoService;
 import com.project.exam.service.ExamService;
 import com.project.exam.service.FrontUserService;
 import com.project.exam.service.QuestionService;
@@ -41,6 +45,8 @@ public class FrontController extends BaseController{
 	ExamService examService;
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	ExamInfoService examInfoService;
 
 	
 	@RequestMapping(value = "index")
@@ -119,6 +125,8 @@ public class FrontController extends BaseController{
 		try {
 			List<TbQuestion> list = this.questionService.getQuestions();
 			model.addAttribute("questionlist", list);
+			int exam_size=Integer.valueOf(Configuration.get("exam_size"));
+			model.addAttribute("exam_size", exam_size);
 			request.getSession().setMaxInactiveInterval(100 * 60);//设置session失效时间
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,8 +135,8 @@ public class FrontController extends BaseController{
 	}
 	
 	/**
-	 * <p>Title: list</p>
-	 * <p>Description: 考试成绩</p>
+	 * <p>Title: saveScore</p>
+	 * <p>Description: 保存考试信息</p>
 	 * @param reqPage 请求页，页码
 	 * @param keyword 查询关键字
 	 * @return String
@@ -138,12 +146,25 @@ public class FrontController extends BaseController{
 		try {
 			HttpSession e=request.getSession();
 			FrontUser user=(FrontUser) e.getAttribute("frontUser");
+			int exam_size=Integer.valueOf(Configuration.get("exam_size"));
+			List<TbExamInfo> examInfoList=new ArrayList<TbExamInfo>();
 			TbExam exam=new TbExam();
 			exam.setStudentId(user.getId());
 			exam.setScore(examscore*2);
 			exam.setUpdateTime(new Date());
 			exam.setCreateTime(new Date());
 			examService.insertSelective(exam);
+			for(int i=1;i<=exam_size;i++) {
+				TbExamInfo examInfo=new TbExamInfo();
+				examInfo.setExamId(exam.getId());
+				examInfo.setCreateTime(new Date());
+				examInfo.setSort(i);
+				examInfo.setMyanswer(request.getParameter("opt"+i));
+				examInfo.setIsRight(Integer.valueOf(request.getParameter("score"+i)));
+				examInfo.setQuestionId(Integer.valueOf(request.getParameter("question"+i)));
+				examInfoList.add(examInfo);
+			}
+			examInfoService.batchInsert(examInfoList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,7 +172,7 @@ public class FrontController extends BaseController{
 	}
 	
 	/**
-	 * <p>Title: list</p>
+	 * <p>Title: score</p>
 	 * <p>Description: 考试成绩</p>
 	 * @param reqPage 请求页，页码
 	 * @param keyword 查询关键字
@@ -178,5 +199,39 @@ public class FrontController extends BaseController{
 			e.printStackTrace();
 		}
 		return "front/score";
+	}
+	
+	/**
+	 * <p>Title: list</p>
+	 * <p>Description: 答题详情</p>
+	 * @param reqPage 请求页，页码
+	 * @param keyword 查询关键字
+	 * @return String
+	 */
+	@RequestMapping("/examInfo")
+	public String examInfo(HttpServletRequest request,Model model, Integer reqPage, String examId,String isRight){
+		try {
+			//获取请求参数
+			if (reqPage == null) {
+				reqPage = 1;
+			}
+			Map<String, Object> params = new HashMap<String, Object>();
+			HttpSession e=request.getSession();
+			FrontUser user=(FrontUser) e.getAttribute("frontUser");
+			params.put("studentId", user.getId());
+			if (!StringUtils.isEmpty(examId)) {
+				params.put("examId", examId);
+			}
+			if (!StringUtils.isEmpty(isRight)) {
+				params.put("isRight", isRight);
+			}
+			
+			List<TbQuestion> questionList = questionService.findExamList(params);
+			model.addAttribute("examQuestionList", questionList);
+			model.addAttribute("examId", examId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "front/examInfo";
 	}
 }

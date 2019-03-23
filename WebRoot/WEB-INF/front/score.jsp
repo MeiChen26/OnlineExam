@@ -34,6 +34,7 @@
 							<td width="10%">姓名</td>
 							<td width="10%">成绩</td>
 							<td width="20%">考试时间</td>
+							<td width="20%">操作</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -44,6 +45,11 @@
 								<td>${exam.name}</td>
 								<td>${exam.score}</td>
 								<td><fmt:formatDate value="${exam.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td>
+									<a href="${pageContext.request.contextPath}/f/examInfo?examId=${exam.id}" class="buttonactive">答题详情</a>
+									<a href="${pageContext.request.contextPath}/f/examInfo?examId=${exam.id}&isRight=0" class="buttonactive" >错题</a>
+									
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

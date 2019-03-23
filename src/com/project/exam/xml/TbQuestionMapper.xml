@@ -227,4 +227,27 @@
 		from tb_question q 
 		left join tb_options o on o.question_id=q.id 
 	</select>
+	
+	<resultMap extends="ResultMapWithOptions" id="ResultExamQuestionOptions" type="com.project.exam.model.TbQuestion">
+		<result column="analysis" jdbcType="VARCHAR" property="analysis" />
+	    <result column="exam_id" jdbcType="INTEGER" property="examId" />
+	    <result column="exam_info_id" jdbcType="INTEGER" property="examInfoId" />
+	    <result column="myanswer" jdbcType="INTEGER" property="myanswer" />
+	    <result column="is_right" jdbcType="INTEGER" property="isRight" />
+  	</resultMap>
+  	<select id="findExamList" resultMap="ResultExamQuestionOptions">
+		select q.*,o.id as option_id,o.content as option_content,o.opt as option_opt,o.rig as option_rig,i.exam_id,i.id as exam_info_id,i.myanswer,i.is_right
+		from tb_question q 
+		inner join tb_exam_info i on q.id=i.question_id
+		left join tb_options o on o.question_id=q.id 
+		<where>
+			<if test="examId!=null">
+				AND i.exam_id = #{examId}
+			</if>
+			<if test="isRight!=null">
+				AND i.is_right = #{isRight}
+			</if>
+		</where>
+		order by i.sort 
+	</select>
 </mapper>

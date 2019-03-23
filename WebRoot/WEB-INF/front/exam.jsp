@@ -30,11 +30,12 @@
 		<div style="width:100%;height:90%;overflow:auto;">
 			<form action="${pageContext.request.contextPath}/f/saveScore" id="form" method="post">
 				<input type="hidden" id="examscore" name="examscore" value="0"/>
-			</form>
 			<table class="table">
 				<tbody>
 					<c:forEach items="${questionlist}" var="question" varStatus="vstatus">
 						<input type="hidden"  name="type${vstatus.count}" value="${question.type}"/>
+						<input type="hidden"  name="score${vstatus.count}" value="0"/>
+						<input type="hidden"  name="question${vstatus.count}" value="${question.id}"/>
 					<tr>
 						<th class="first minw120"></th>
 						<th class="second maxw300">
@@ -68,6 +69,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			</form>
 		</div>
 		
 		<div style="float:right;margin-right:40px;font-size: 16px;">
@@ -111,7 +113,8 @@
 		//交卷
 		function hand() {
 			var score=0;
-			for (var i=1;i<11;i++)
+			var examSize=${exam_size}
+			for (var i=1;i<=examSize;i++)
 			{ 
 				var type = $("input[name='type"+i+"']").val();
 				var flag = 0;
@@ -136,6 +139,7 @@
 				    	}
 					});
 				}
+				$("input[name='score"+i+"']").val(flag);		
 				score=score+flag;
 			}
 				$("#examscore").val(score);

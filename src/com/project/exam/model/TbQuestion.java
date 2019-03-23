@@ -23,6 +23,14 @@ public class TbQuestion {
 
     private String analysis;
     
+    private Integer examId;
+    
+    private Integer examInfoId;
+    
+    private String myanswer;
+    
+    private Integer isRight;
+    
     private List<TbOptions> options = new ArrayList<>();
 
     public Integer getId() {
@@ -104,4 +112,39 @@ public class TbQuestion {
 	public void setOptions(List<TbOptions> options) {
 		this.options = options;
 	}
+
+	public Integer getExamId() {
+		return examId;
+	}
+
+	public void setExamId(Integer examId) {
+		this.examId = examId;
+	}
+
+
+	public Integer getExamInfoId() {
+		return examInfoId;
+	}
+
+	public void setExamInfoId(Integer examInfoId) {
+		this.examInfoId = examInfoId;
+	}
+
+	public String getMyanswer() {
+		return myanswer;
+	}
+
+	public void setMyanswer(String myanswer) {
+		this.myanswer = myanswer;
+	}
+
+	public Integer getIsRight() {
+		return isRight;
+	}
+
+	public void setIsRight(Integer isRight) {
+		this.isRight = isRight;
+	}
+	
+	
 }
