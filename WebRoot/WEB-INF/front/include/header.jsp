@@ -45,8 +45,8 @@
 			<%-- <c:when test="${fns:getMember().id==null}">
 			33333
 			</c:when> --%>
-			<c:when test="${memberSession.id != null}">
-			<a href="${ctx}/index">${memberSession.loginName}</a>
+			<c:when test="${frontUser != null}">
+			<a href="${ctx}}/selfCenter">${frontUser.name}</a>
 			&nbsp;
 			<a href="${ctx}/logout"><span class="e34b16Color ak2">退出登录 </span></a>
 			</c:when>

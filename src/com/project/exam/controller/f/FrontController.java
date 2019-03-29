@@ -234,4 +234,20 @@ public class FrontController extends BaseController{
 		}
 		return "front/examInfo";
 	}
+	
+	
+	/**
+	 * <p>Title: logout</p>
+	 * <p>Description: 退出</p>
+	 * @param model
+	 * @param request
+	 * @param frontUser
+	 * @return String
+	 */
+	@RequestMapping(value = "logout")
+	public String logout(Model model,HttpServletRequest request) {
+		HttpSession e=request.getSession();
+    	e.removeAttribute("frontUser");
+		return "front/login";
+	}
 }
