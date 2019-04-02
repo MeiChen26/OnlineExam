@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="${ctxAssets}/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <style type="text/css">
 	.exercise-title{
 		font-size: 16px;

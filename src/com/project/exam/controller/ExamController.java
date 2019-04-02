@@ -180,7 +180,7 @@ public class ExamController extends BaseController {
 	
 	/**
 	 * <p>Title: list</p>
-	 * <p>Description: 考试成绩到处</p>
+	 * <p>Description: 考试成绩导出</p>
 	 * @param keyword 查询关键字
 	 * @return String
 	 */

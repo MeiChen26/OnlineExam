@@ -1,5 +1,6 @@
 package com.project.exam.controller.f;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
@@ -29,6 +31,7 @@ import com.project.exam.service.ExamInfoService;
 import com.project.exam.service.ExamService;
 import com.project.exam.service.FrontUserService;
 import com.project.exam.service.QuestionService;
+import com.project.utils.ExportExcel;
 import com.project.utils.PaginationInfo;
 /**
  * 前台controller
@@ -249,5 +252,47 @@ public class FrontController extends BaseController{
 		HttpSession e=request.getSession();
     	e.removeAttribute("frontUser");
 		return "front/login";
+	}
+	
+	/**
+	 * <p>Title: exportData</p>
+	 * <p>Description: 考试成绩导出</p>
+	 * @param keyword 查询关键字
+	 * @return String
+	 */
+	@RequestMapping("/exportData")
+	public void exportData(HttpServletResponse response,Model model,String keyword,String studentId){
+		try {
+			
+			Map<String, Object> params = new HashMap<String, Object>();
+			if (!StringUtils.isEmpty(keyword)) {
+				params.put("keyword", keyword);
+			}
+			if (!StringUtils.isEmpty(studentId)) {
+				params.put("studentId", studentId);
+			}
+			
+			List<TbExam> list = examService.findList(params);
+			String title = "成绩表";
+            String[] rowsName = new String[]{"序号","学号","姓名","成绩","考试时间"};
+            List<Object[]>  dataList = new ArrayList<Object[]>();
+            Object[] objs = null;
+            for (int i = 0; i < list.size(); i++) {
+                TbExam exam = list.get(i);
+                objs = new Object[rowsName.length];
+                objs[0] = i;
+                objs[1] = exam.getStudentNo();
+                objs[2] = exam.getName();
+                objs[3] = exam.getScore();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String date = df.format(exam.getCreateTime());
+                objs[4] = date;
+                dataList.add(objs);
+            }
+            ExportExcel ex = new ExportExcel("成绩",title, rowsName, dataList,response);
+            ex.export();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

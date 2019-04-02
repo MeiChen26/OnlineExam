@@ -10,44 +10,46 @@
 	<script type="text/javascript" src="${ctxAssets}/plugin/jquery-validation/js/jquery.validate.min.js"></script>
 </head>
 <body>
-<div id="main" style="width: 90%;height:77%;">
-	<form id="inputForm" name="inputForm"  method="post" >
-	    <input type="hidden" name="id" value="${frontUser.id}">
-		<table class="table">
-            <tbody>
-                <tr>
-                    <th class="first minw120">姓名</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <input type="text" name="name" id="name" value="${frontUser.name }" class="required" placeholder="姓名" title="必填字段"/>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="first minw120">学号</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <input type="text" name="studentNo" value="${frontUser.studentNo}" placeholder="学号" />
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="first minw120">密码</th>
-                    <th class="second maxw300">
-                        <div class="text-input">
-                            <input type="password" name="password" id="password" value="${frontUser.password }" class="required" placeholder="设置密码" title="必填字段"/><br/>
-							<input type="password" name="rpassword" id="rpasswordc" value="" class="required" placeholder="确认密码" title="必填字段"/>
-                        </div>
-                    </th>
-                </tr>
-                
-            </tbody>
-        </table>
-        <div class="btn-box">
-            <input class="active" type="submit" value="确定">
-            <input type="button" value="取消" onclick="javascript:history.go(-1);">
-        </div>
-    </form>
+<div id="main" style="width: 100%;height:65%;background-color:#fff">
+	<div style="width: 320px;margin: 20px auto;text-align: center;">
+		<form id="inputForm" name="inputForm"  method="post" >
+		    <input type="hidden" name="id" value="${frontUser.id}">
+			<table class="table">
+	            <tbody>
+	                <tr>
+	                    <th class="first minw120">姓名</th>
+	                    <th class="second maxw300">
+	                        <div class="text-input">
+	                            <input type="text" name="name" id="name" value="${frontUser.name }" class="required" placeholder="姓名" title="必填字段"/>
+	                        </div>
+	                    </th>
+	                </tr>
+	                <tr>
+	                    <th class="first minw120">学号</th>
+	                    <th class="second maxw300">
+	                        <div class="text-input">
+	                            <input type="text" name="studentNo" value="${frontUser.studentNo}" placeholder="学号" />
+	                        </div>
+	                    </th>
+	                </tr>
+	                <tr>
+	                    <th class="first minw120">密码</th>
+	                    <th class="second maxw300">
+	                        <div class="text-input">
+	                            <input type="password" name="password" id="password" value="${frontUser.password }" class="required" placeholder="设置密码" title="必填字段"/><br/>
+								<input type="password" name="rpassword" id="rpasswordc" value="" class="required" placeholder="确认密码" title="必填字段"/>
+	                        </div>
+	                    </th>
+	                </tr>
+	                
+	            </tbody>
+	        </table>
+	        <div class="btn-box">
+	            <input class="active" type="submit" value="确定">
+	            <input type="button" value="取消" onclick="javascript:history.go(-1);">
+	        </div>
+	    </form>
+    </div>
    </div> 
 <script type="text/javascript">
 var path = '${pageContext.request.contextPath}';

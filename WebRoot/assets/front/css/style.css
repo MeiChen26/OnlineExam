@@ -105,10 +105,10 @@ a:hover{ color:#333; text-decoration:none;}
 
 
 .logo{ float:left; margin:20px 0;}
-#nav{ float:right;}
+#nav{ float:right;margin-right:260px;}
 #nav ul{ }
 #nav ul li{ width:110px; float:left;}
-#nav ul li a{ width:110px; text-align:center; line-height:110px; font-size:18px; display:block;}
+#nav ul li a{ width:110px; text-align:center; line-height:80px; font-size:18px; display:block;}
 #nav ul li a:hover, .active a{ background:#F27F0F; color:#fff;}
 
 .td{ text-align:center; padding-bottom:50px;}

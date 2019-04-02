@@ -126,6 +126,20 @@
 							</li>
 						</ul>
 					</li>
+					<li class="">
+						<a href="JavaScript:void(0);"> <span
+							class="img-content "></span> <span
+							class="menu-text">系统管理</span>
+						</a>
+						<ul class="menu-ul-second">
+							<li class="">
+								<a href="${ctx}/system/toSetPwd"> <span
+									class="img-content img-map-fengong"></span> <span
+									class="menu-text">设置密码</span>
+								</a>
+							</li>
+						</ul>
+					</li>
 				</c:if>
 			</ul>
 		</div>

@@ -6,17 +6,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>编辑教练信息</title>
+<title>编辑试题信息</title>
 </head>
 <body>
 	<!-- PAGE CONTENT BEGIN -->
 	<div class="right-area">
-		<h3>编辑
-		<c:if test="${subject eq 1 }">科目一</c:if>
-		<c:if test="${subject eq 2 }">科目二</c:if>
-		<c:if test="${subject eq 3 }">科目三</c:if>
-		<c:if test="${subject eq 4 }">科目四</c:if>
-		</h3>
+		<h3>编辑 </h3>
 		<form id="inputForm" name="inputForm"
 			action="${pageContext.request.contextPath}/question/save"
 			method="post" enctype="multipart/form-data">
@@ -79,19 +74,6 @@
 							<th class="second maxw300">
 								<div class="text-input">
 									<textarea name="analysis" rows="8" cols="30">${question.analysis }</textarea>
-								</div>
-							</th>
-						</tr>
-					</c:if>
-					<c:if test="${subject eq 2 || subject eq 3 }">
-						<tr>
-							<th class="first minw120">上传视频</th>
-							<th class="second maxw300">
-								<div class="text-input">
-									<c:if test="${not empty question.attachment }">
-										<a href="${pageContext.request.contextPath}/${question.attachment}" target="_blank">查看视频</a>
-									</c:if>
-									<input type="file" id="attachment" name="multipartFile" >
 								</div>
 							</th>
 						</tr>

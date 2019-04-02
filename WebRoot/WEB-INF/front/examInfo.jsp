@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/front/include/header.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
+<link href="${ctxAssets}/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <head>
 <style type="text/css">
 	.exercise-title{

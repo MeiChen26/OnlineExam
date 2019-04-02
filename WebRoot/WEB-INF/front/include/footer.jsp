@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <footer id="fh5co-footer" role="contentinfo">
-		<div class="container" >
+		<div>
 			<div class="row copyright">
-				<div class="col-md-12 text-center">
+				<div style="text-align:center;">
 					<p>
 						<small class="block">&copy; 2018-2019在线考试系统All Rights Reserved.</small> 
 					</p>

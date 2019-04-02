@@ -10,7 +10,6 @@
 <meta name="description" content="这里是网页的描述,是给搜索引擎看的,搜索引擎根据这个描述进行收录排名,一般是网页内的关键字。" />
 <meta name="keywords" content="用来告诉搜索引擎你网页的关键字是什么" />
 <link href="${ctxAssets}/front/css/css.css" rel='stylesheet' type='text/css' />
-<link href="${ctxAssets}/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="${ctxAssets}/front/css/style.css" rel='stylesheet' type='text/css' />
 <link href="${ctxAssets}/front/css/application.css" media="screen" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${ctxAssets}/plugin/jquery/jquery-1.7.2.js" ></script>
@@ -52,8 +51,8 @@
 			</c:when>
 			<c:otherwise>
 			<a href="${ctx}/toRegister"><span class="e34b16Color">注 册</span></a>
-			<%-- <span class="fenge_line">|</span>			
-			<a href="${ctx}/toLogin"><span class="e34b16Color ak2">登 录</span></a> --%>
+			<span class="fenge_line">|</span>			
+			<a href="${ctx}/toLogin"><span class="e34b16Color ak2">登 录</span></a>
 			</c:otherwise>
 			</c:choose>
 			<span class="huColor" style="display: none;">帮助中心</span>
@@ -65,12 +64,13 @@
 	<!-- 头部 -->
 </section>
 <!-- 导航 -->
-<nav class="fh5co-nav">
+<nav class="fh5co-nav" style="background-color:#F5F5F6;border-bottom:1px solid #D7D8D9;">
 	<div class="container">
 		<div class="mid">
-<!--            	<div class="logo"> -->
+           	<div class="logo">
+           	<span class="huColor" style="font-size:20px;">在线考试系统</span>
 <%-- 				<a href="${ctx }/"><img src="${ctxStatic}/front/images/logo.png"></a> --%>
-<!--                </div> -->
+            </div>
 			<div id="nav">
 				<ul>
 <%-- 					   <li id="toLogin"><a href="${ctx }/toLogin">登录</a></li> --%>

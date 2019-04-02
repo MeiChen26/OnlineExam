@@ -1,5 +1,8 @@
 package com.project.exam.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,11 +12,17 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.project.exam.model.SysUser;
+import com.project.exam.service.SysUserService;
+import com.project.utils.EncryptUtil;
+import com.project.utils.StringUtil;
 
 /**
  * <p>ClassName: SystemController</p>
@@ -25,6 +34,9 @@ import com.project.exam.model.SysUser;
 @RequestMapping("/system")
 public class SystemController extends BaseController{
 	static final Logger log = LoggerFactory.getLogger(SystemController.class);
+	
+	@Autowired
+	SysUserService userService;
 	
 	/**
 	 * <p>Title: loginpage</p>
@@ -65,6 +77,70 @@ public class SystemController extends BaseController{
 	public String home(Model model, HttpServletRequest request){
 		log.info("[home] home page ... ");
 		return "redirect:/student/list";
+	}
+	
+	/**
+	 * <p>Title: toSetPwd</p>
+	 * <p>Description: 跳到修改密码页面</p>
+	 * @param model
+	 * @return String
+	 */
+	@RequestMapping("/toSetPwd")
+	public String toSetPwd(Model model,Integer userId){
+			if(StringUtil.isNotEmpty(userId)) {
+				SysUser user = userService.selectByPrimaryKey(userId);
+				
+				model.addAttribute("user", user);
+			}else {
+				model.addAttribute("user", getCurrentUser());
+			}
+			return "system/setPwd";
+	}
+
+	/**
+	 * <p>Title: setPwd</p>
+	 * <p>Description: 保存用户信息</p>
+	 * @param user 用户信息
+	 * @param opassword 原密码 String类型
+	 * @return String
+	 */
+	@RequestMapping(value = "/setPwd",produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String setPwd(Model model,  SysUser user, String opassword){
+		log.info("[setPwd] setPwd");
+		Map<String,String> resultMap=new HashMap<String,String>();
+		if(user == null){
+			resultMap.put("flag", "0");
+			resultMap.put("message", "未收到数据");
+			return JSON.toJSONString(resultMap);
+		}
+		try {
+			SysUser user1=userService.selectByPrimaryKey(user.getId());
+			if(user1!=null) {
+//				if(EncryptUtil.validatePassword(opassword, user1.getPassword())) {
+					user.setPassword(EncryptUtil.entryptPassword(user.getPassword()));
+					userService.updateByPrimaryKeySelective(user);
+					resultMap.put("flag", "1");
+					resultMap.put("message", "密码修改成功");
+					return JSON.toJSONString(resultMap);
+//				}else {
+//					resultMap.put("flag", "0");
+//					resultMap.put("message", "原密码错误");
+//					return JSON.toJSONString(resultMap);
+//				}
+			}else {
+				resultMap.put("flag", "0");
+				resultMap.put("message", "用户不存在，请先登录");
+				return JSON.toJSONString(resultMap);
+			}
+			
+		} catch (Exception e) {
+			
+			resultMap.put("flag", "0");
+			resultMap.put("message", "保存失败");
+			return JSON.toJSONString(resultMap);
+		}
+		
 	}
 	
 	/**

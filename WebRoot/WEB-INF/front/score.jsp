@@ -6,6 +6,7 @@
 <html>
 <head>
 	<title>成绩查询</title>
+	<link href="${ctxAssets}/front/css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/plugin/zxf_page/zxf_page.css" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugin/zxf_page/zxf_page.js"></script>
 	<style type="text/css">
@@ -87,7 +88,7 @@
 		$("#score").addClass("active");
 	});
     function exportData(){
-		$("#selectForm").attr("action",path+"/exam/exportData").submit();
+		$("#selectForm").attr("action",path+"/f/exportData").submit();
     }	
 </script>	
 <%@ include file="/WEB-INF/front/include/footer.jsp"%>
