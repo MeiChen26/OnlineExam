@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://www.springframework.org/schema/aop
+         				http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+         				http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+
+    <!-- 处理静态资源访问问题，添加这个表情就不会吧静态资源当做controller 路径处理 -->
+    <mvc:resources location="/assets/" mapping="/assets/**" />
+    <!-- 下面注释部分 用于开启 shiro 注解权限管理 -->
+    <!-- <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    开启Shiro的注解(如@RequiresRoles，@RequiresPermissions)，需借助SpringAOP扫描使用Shiro注解的类，  并在必要时进行安全逻辑验证
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"></property>
+    </bean> -->
+
+    <!-- 扫描@Controller注解 使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.project.exam.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <mvc:annotation-driven/>
+    <task:annotation-driven/>
+
+    <!-- spring帮助类 -->
+    <!-- <bean id="SpringApplicationContext" class="com.project.utils.ApplicationContextHelper"></bean>   -->
+    <!-- 引入同文件夹下的redis属性配置文件 -->
+    <!-- <import resource="redis-context.xml"/> -->
+
+    <!-- <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg>
+                    <bean class="java.nio.charset.Charset" factory-method="forName">
+                        <constructor-arg value="UTF-8" />
+                    </bean>
+                </constructor-arg>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>text/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven> -->
+
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8" />
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000" />
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960" />
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/assets/**"/>
+            <bean class="com.project.exam.common.UserOperateLogInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!-- 不拦截登录 -->
+            <mvc:exclude-mapping path="/assets/**"/>
+            <mvc:exclude-mapping path="/system/loginpage"/>
+            <mvc:exclude-mapping path="/f/**"/>
+            <bean class="com.project.exam.common.SystemInterceptor">
+            </bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/f/**"/>
+            <!-- 不拦截登录注册首页 -->
+            <mvc:exclude-mapping path="/f/toLogin"/>
+            <mvc:exclude-mapping path="/f/login"/>
+            <mvc:exclude-mapping path="/f/toRegister"/>
+            <mvc:exclude-mapping path="/f/register"/>
+            <bean class="com.project.exam.common.FrontInterceptor">
+            </bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+</beans>
